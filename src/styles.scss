@@ -1,0 +1,247 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body { 
+background-color:#ccc6;
+ }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+a{
+	text-decoration: none !important;
+}
+.content_table{
+	//width:100%;
+	//float:left;
+	//display:inline-block;
+	table {
+  width: 100%;
+}
+}
+.listing_table, .listing_sub_mainSection{
+		//margin-left:-53px;
+}
+.tabListMulti{
+   background-color:#fff;
+}
+ /*------ sub sidebar styles----------------------*/ 
+
+.donut_charts {
+	display:inline-block;
+	width: 300px;
+}
+
+.chartjs-render-monitor{
+	width:100%;
+}
+.sub_mainSection{
+	       // display: inline-block;
+		    //width: 100%;
+		   
+		    .action_section{
+		      	background-color: #fff;
+                box-shadow: 0px 5px 9px -4px #ccc;
+		    }
+		    ul{
+		    	padding:0;
+
+		    }
+		    li{
+			    list-style:none;
+			    display:inline-block;
+			    color:#777;
+			    font-size:12px;
+                padding:0 5px;
+		    }
+		    .listingName{
+		    	display:inline-block;
+		    	h4{
+		    	    font-size: 15px;
+				    padding: 12px 0px 3px 11px;
+				    color: #607d8b;
+		    	}
+		    }
+		    .all_function_icon{
+				    float:right;
+				    display:inline-block;
+		       span{
+				    display:block;
+				    text-align:center;
+							line-height: 14px;
+							color: #777;
+							font-size: 12px;
+			    }
+			    ul{
+	      		   float:left;
+		           padding-top: 6px;
+			    }
+		    }
+		  
+		    .find_prpty{
+			    border:0;
+			    border-bottom:1px solid #ccc;
+			    box-shadow:0 0 0 0;
+					outline:0;
+					padding-left: 5px;
+		    }
+		    .top_toggle{
+             border-left:1px solid #ccc;
+             i{
+               font-size:27px;
+               color:#607d8b;
+             }
+		    }
+		    .filter_section{
+		    li{
+		      cursor:pointer;
+		    }
+		    }
+}
+.sub_header_contnr{
+		    background-color: #fff;
+		    box-shadow: 0px 5px 9px -4px #ccc;
+		    width: 100%;
+            display: inline-block;
+            margin-bottom:16px;
+		ul{
+			padding:0;
+			margin:0;
+		}
+		li{
+			list-style:none;
+			display: inline-block;
+			cursor: pointer;
+		}
+		a{
+			padding:7px 12px;
+			text-decoration:none;
+			color:#777;
+			font-size:12px;
+		    display: block;
+		}
+		// a:hover{
+		// 	border-bottom:3px solid #607d8b;
+		// }
+		.activePlan{
+			border-bottom:3px solid #607d8b;
+		}
+	    .rangeDate{
+			float:right;
+		    font-size: 12px;
+		    color: #777;
+		    border-bottom: 1px solid #ccc;
+		    padding-top: 6px;
+
+		}
+		.plansList{
+			float:left;
+		}
+}
+/* --------------------sub sidebar end----------------------------*/
+/*------------------sub sidebar styles--------------------------*/
+
+.subLeftNavbar{
+        padding:32px  0;
+	    background-color: #ccc6;
+	    //min-height: 100%;
+	    //max-height: 100%;
+	    border-right: 1px solid #ccc;
+	    ///width: 9%;
+	    display: inline-block;
+	    min-width: 80%;
+        margin-left: 8%;
+        height:100vh;
+ul{
+	padding:0;
+}
+ li{list-style:none;}
+ a{
+	 text-decoration:none;color:#777;font-size:12px;
+	 padding: 5px 5px 5px 15px;
+	 display: block;
+
+ }
+ a:hover{
+ 	 border-left:2px solid #607d8b;
+	 background-color:#ddd;
+ }
+ .activeLeft{
+	 border-left:2px solid #607d8b;
+	 background-color:#bdbbbb;
+ }
+}
+.left_nav_main{
+	background-color: #ccc6;
+}
+/*---------------------sub sidebar end--------------------*/
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell{padding-left:10px!important;padding-right:10px;}
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
+	border:1px solid #ddd !important;
+	padding:5px !important;
+}
+.mat-tab-label-container{
+	background:#fff;
+}
+/* add subscription*/
+.chng_pass_word{
+  box-shadow: 1px 1px 3px 1px #ccc;
+  height: auto;
+  padding: 20px;
+  background-color:#fff;
+  .act_setngs{
+    padding:10px 30%;
+  }
+  .example-full-width{
+    width:100%;
+  }
+  .chne_pass_wrd_head{
+    font-size: 23px;
+    font-weight: 600;
+  }
+  .save_btn_chge_pas_wrd{
+    background: #e21e24;
+    color:#fff;
+    padding:0px 25px;
+    border:0px;
+    outline: 0px;
+    margin-right:40px;
+    border-radius:3px;
+  }
+  .cncl_btn_chge_pas_wrd{
+    background: #607d8b;
+    color:#fff;
+    padding:0px 20px;
+    border:0px;
+    outline: 0px;
+    border-radius:3px;
+  }
+.example-right-align {
+  text-align: right;
+}
+tr.mat-header-row{
+	height:auto !important; 
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+.upld_icon{
+  color:#fff;
+  padding-right:5px;
+  vertical-align: middle;
+}
+.upld_btn_file button{
+  background: #607d8b;
+  color: #fff;
+  border: 0px;
+  width: 100%;
+  text-align: left;
+  font-weight: 700;
+  outline: 0px;
+  padding: 5px 10px;
+  margin:15px 0px;
+}
+}
+

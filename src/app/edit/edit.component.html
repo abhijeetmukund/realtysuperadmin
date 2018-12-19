@@ -1,0 +1,74 @@
+<div class="edit_frm_s_admin">
+  <form class="example-form">
+    <h4 class="text-center">Edit Your Property</h4>
+  <div class="row">
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Property Id" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Service Type" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Seller Type" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="picker" placeholder="Posted On">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Phone No" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Location" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <!-- <mat-form-field class="example-full-width">
+          <mat-select placeholder="City">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <mat-form-field class="example-full-width">
+		  <mat-select placeholder="Select City" >
+		    <mat-option *ngFor="let city of cities" [value]="city.value">
+		      {{city.viewValue}}
+		    </mat-option>
+		  </mat-select>
+		</mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="No Of Leads" value="">
+        </mat-form-field>
+      </div>
+  </div>
+  <div class="text-center">
+          <button mat-button class="save_btn_chge_pas_wrd">Update</button>
+          <button mat-button mat-dialog-close type="reset" class="cncl_btn_chge_pas_wrd">Cancel</button>
+        </div>
+</form>
+</div>

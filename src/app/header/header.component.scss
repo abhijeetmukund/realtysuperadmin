@@ -1,0 +1,162 @@
+.top-header{
+	background: #ccc;
+    height: 52px;
+    padding: 4px;
+    box-shadow: 0px -19px 15px 17px;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    ::-webkit-scrollbar , scrollbar{ 
+    display: none; 
+}
+ .leftNavContnr{
+    background:#4c4c4c;
+    position:absolute;
+    left: -2px;
+    top: 48px;
+    width: 60%;
+    height: 92vh;
+    overflow-y: scroll;
+
+   ul{
+      padding:0;
+      margin:0;
+   }
+   li{
+      list-style:none;
+      }
+      a{
+      color:#fff;
+      font-size:13px;
+      text-decoration:none;
+      display:block;
+      padding:10px;
+      }
+      a:hover{
+      background:#607d8b;
+
+      }
+    }
+.leftNavContnr {
+	img{
+	width:20px; 
+	}
+}
+}
+.logo_nav img{
+		width:150px;
+}
+.rightList_top{
+		float:left;
+	ul{
+		float:left;
+		padding:0;
+	    padding-right:4px;
+	}
+	li{
+		float:left;
+		list-style:none;
+		padding:4px;
+		line-height: 14px;
+	    font-size: 12px;
+	    color:#777;
+	}
+	.list_icon{
+		display:block;
+	}
+  i{
+    font-size:18px;
+ }
+ .user_img_sec{
+ 	width:50px;
+ 	padding-top:0;
+ 	margin-top:0;
+ 	img{
+ 	width:100%;
+ 	}
+ }
+}
+	.searchLeft_icon{
+		 border-right:1px solid #ccc;
+		 text-align:center;
+
+	}
+	.rightMenuIcon {float:right;}
+	.help_section{
+		margin-top:5px;
+	}
+	.logo_nav{
+		color:#777;
+		margin-right: 10px;
+		font-size: 20px;
+	}
+.user_profile{
+	border:1px solid red;
+}
+.profile_section{
+	    position: absolute;
+    right: 0px;
+    /* bottom: -8px; */
+    background: #fff;
+    width: 357px;
+    height: 170px;
+    border: 1px solid #ccc;
+    /* border-radius: 0px; */
+    box-shadow: 0px 3px 16px 1px #ccc;
+    margin-top: 49px;
+    padding: 10px;
+    text-align: left;
+}
+.user_imgs{
+	margin-bottom: 33px;
+    margin-top: 10px;
+}
+.user_imgs img{
+	width: 75px;
+}
+.realty{
+	font-weight:700;
+	font-size:16px;
+	display:block;
+}
+.user_imgs ,.user_dtl{
+	display:inline-block;
+
+}
+.profile_logout{
+	    background: #ccc6;
+    margin: -10px;
+    bottom: 10px;
+    /* position: fixed; */
+    top: 10px;
+    height: 50px;
+    padding: 8px;
+}
+.usr_profile{
+    border: 1px solid #ddd;
+    padding: 4px 19px;
+    color: #777;
+    text-decoration: none;
+    float: left;
+}
+.usr_logout{
+	float: right;
+    border: 1px solid #ddd;
+    padding: 4px 19px;
+    color: #777;
+    text-decoration:none;
+}
+.up_carrt{
+	font-size: 34px !important;
+    position: absolute;
+    right: 29px;
+    top: -23px;
+    color: #fff;
+}
+.countryPicker{
+    margin-top: -9px;
+}
+.user_dtl{
+    position: absolute;
+    top: 31px;
+}

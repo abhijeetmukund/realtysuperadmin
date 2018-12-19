@@ -1,0 +1,41 @@
+<div class="chng_pass_word">
+  <form>
+    <div class="row">
+      <div class="col-sm-12 act_setngs">
+        <p class="text-center chne_pass_wrd_head">Add Ads</p>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Select Country">
+            <mat-option *ngFor="let country of countrys" [value]="country.value">
+              {{country.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Enter State" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Enter City" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Add URL" value="">
+        </mat-form-field>
+        <!-- <mat-form-field class="example-full-width"> -->
+          <div class="upld_btn_file">
+            <button md-raised-button class="" color="primary" (click)="fileInput.click()"><i class="material-icons upld_icon">cloud_upload</i>Upload Image</button>
+            <input hidden type="file" #fileInput multiple>
+          </div>
+        <!-- </mat-form-field> -->
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Status">
+            <mat-option *ngFor="let status of statuss" [value]="status.value">
+              {{status.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="text-center">
+          <button mat-button class="cncl_btn_chge_pas_wrd">Submit</button>
+        </div>
+      </div>
+      </div>
+  </form>
+</div>

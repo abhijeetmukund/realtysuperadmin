@@ -1,0 +1,80 @@
+<nav class="top-header">
+  <!-- Brand -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+          <a class="logo_nav" (click)="toggle()" (clickOutside)="onClickedOutside($event)">  
+           <i class="fa fa-bars" aria-hidden="true"></i>
+          </a>
+          <a class="logo_nav" routerLink="">
+            <img src="assets/images/realty_monk.svg" alt="RealtyMonk">
+          </a>
+         <div class="leftNavContnr" *ngIf="show_dialog">
+                <ul class="sideToggleNav">
+                  <li *ngFor="let user of users"><a routerLink="{{user.type}}"> <img src="{{user.category_icon}}"> {{user.category}} </a></li> 
+                </ul>   
+           </div>
+       </div> 
+      <!-- Links -->
+       <div class="col-md-3 col-sm-1"></div>
+       <div class="col-md-6 col-sm-8">
+        <div class="rightMenuIcon">
+        <div class="rightList_top ">
+          <ul class="left_lst_icon searchLeft_icon">
+            <li>
+             <!--  <input type="text" name="" >
+              <span class=" search_country"><i class="material-icons">search</i></span>
+              <br>
+              <span class="list_txt">Search   Country</span> -->
+              <!-- <mat-form-field>
+                <mat-select placeholder="Choose Country" [(ngModel)]="countrySelected">
+                  <mat-option *ngFor="let country of countryList" [value]="country.cctld" (click)="changeCountry(countrySelected)">
+                    {{country.countryname}}
+                  </mat-option>
+                </mat-select> 
+              </mat-form-field> -->
+             </li>
+            <li><span class="list_icon"><i class="material-icons">poll</i></span>
+              <span class="list_txt">Reports</span>
+            </li>
+            <li><span class="list_icon"><i class="material-icons">build</i></span>
+              <span class="list_txt">Tools</span>
+            </li>
+          </ul>
+      </div>
+       <div class="rightList_top">
+          <ul class="help_section">
+            <li> <span class=""><i class="material-icons">loop</i></span></li>
+            <li> <span class=""><i class="material-icons">notifications</i></span></li>
+            <li> <span class=""><i class="material-icons">contact_support</i></span></li>
+          </ul> 
+           <ul class="user_mail text-right">
+            <li><span class="text-right">Sam</span><br>
+               <span class="text-right">superadmin@realtymonk.com</span>
+               </li>
+             <li class="user_img_sec" (click)="checkProfile()" (clickOutside)="onClickOutside($event)"><img src="assets/images/user.svg" alt="Super Admin"></li>
+             <div class="profile_section" *ngIf="logoutProfile">
+                <i class="fa fa-caret-up up_carrt" aria-hidden="true"></i>
+                <div class="user_imgs"> 
+                  <img src="assets/images/user.svg" alt="Super Admin" class="img-responsive"></div>
+                <div class="user_dtl">
+                  <span class="realty">Realty</span>
+                  <span class="text-right">superadmin@realtymonk.com</span>
+                </div>
+                
+                <div class="profile_logout">
+                  <a routerLink="/user-profile" class="usr_profile" (click)="closeProfile()">Profile</a>
+                  <a class="usr_logout" (click)="logout()">Logout</a>
+                </div>
+             </div>
+             <!-- <button mat-button (click)="openModal()">Open dialog</button> -->
+          </ul>
+      </div>
+      <div class="rightList_top">
+       
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</nav>

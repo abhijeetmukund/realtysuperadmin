@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.login_s_ad_min{
+        width:30%;
+        margin:50px auto;
+        box-shadow: 1px 1px 5px 3px #ccc;
+        background: #cccccc38;
+        padding:10px 30px;
+        .example-full-width{
+         width:100%;
+         padding-top: 25px;
+        }
+        .sbmt_admin_btn{
+         background: #e21e24;
+     color: #fff;
+     width: 100%;
+     margin-top: 50px;
+     outline:0px;
+        }
+        .remember_field{
+                float:left;
+        }
+        .frgt_pass_wrd_admin{
+                float:right;
+                cursor:pointer;
+                position:relative;
+                bottom:7px;
+                background:transparent;
+                box-shadow:none;
+                outline:0px;
+        }
+        .frgt_pass_wrd_admin:hover{
+                color:#e21e24;
+        }
+        .chnge_pass_wrd_columns{
+                padding-top:35px;
+        }
+        .mat-dialog-container{
+    padding:0px;
+}
+}

@@ -1,0 +1,137 @@
+<!-- <div class="popup_pack_ers">
+  <form>
+    <h3 class="text-center">EDIT FORM</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" *ngFor="let use of user" value="{{use.packer_name}}">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Phone" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="picker" placeholder="Contacted Date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Location From" value="" ngx-google-places-autocomplete #placesRef="ngx-places">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Location To" value="" ngx-google-places-autocomplete #placesRef="ngx-places">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Vehicle No" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Vehicle Type" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Driver Name" value="">
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Payment" value="">
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div class="text-center">
+      <button mat-button class="save_btn_chge_pas_wrd">Submit</button>
+      <button mat-button mat-dialog-close class="cncl_btn_chge_pas_wrd">Cancel</button>
+  </div>
+</div> -->
+
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+
+  <div class="form-group">
+      <label>Packer ID</label>
+      <input name="packer_id" #packer_id="ngModel" [(ngModel)]="service.formData.packer_id" class="form-control" required>
+      <div class="validation-error" *ngIf="FullName.invalid && FullName.touched">This field is required.</div>
+  </div>
+
+  <div class="form-group">
+      <label>Packer Name</label>
+      <input name="packer_name" #packer_name="ngModel" [(ngModel)]="service.formData.packer_name" class="form-control" required>
+      <div class="validation-error" *ngIf="FullName.invalid && FullName.touched">This field is required.</div>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input name="packer_email" #packer_email="ngModel" [(ngModel)]="service.formData.packer_email" class="form-control" required>
+    <div class="validation-error" *ngIf="FullName.invalid && FullName.touched">This field is required.</div>
+  </div>
+
+  <div class="form-group">
+    <label>Mobile</label>
+    <input name="packer_mobile" #packer_mobile="ngModel" [(ngModel)]="service.formData.packer_mobile" class="form-control">
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Location From</label>
+      <input name="packer_location_from" #packer_location_from="ngModel" [(ngModel)]="service.formData.packer_location_from" class="form-control">
+    </div>
+    <div class="form-group  col-md-6">
+      <label>Location To</label>
+      <input name="packer_location_to" #packer_location_to="ngModel" [(ngModel)]="service.formData.packer_location_to" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Contacted Date</label>
+      <input name="contacted_date" #contacted_date="ngModel" [(ngModel)]="service.formData.contacted_date" class="form-control">
+    </div>
+    <div class="form-group  col-md-6">
+      <label>Vehicle No</label>
+      <input name="VehicleNo" #VehicleNo="ngModel" [(ngModel)]="service.formData.VehicleNo" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Vehicle Type</label>
+      <input name="VehicleType" #VehicleType="ngModel" [(ngModel)]="service.formData.VehicleType" class="form-control">
+    </div>
+    <div class="form-group  col-md-6">
+      <label>Driver Name</label>
+      <input name="DriverName" #DriverName="ngModel" [(ngModel)]="service.formData.DriverName" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group  col-md-6">
+      <label>Payment</label>
+      <input name="payment" #payment="ngModel" [(ngModel)]="service.formData.payment" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-block">SUBMIT</button>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-lg btn-block" mat-dialog-close>Cancel</button>
+  </div>
+</form>

@@ -1,0 +1,58 @@
+.view_blog_admin{
+  padding: 15px 0;
+  .vw_blg_list{
+    margin-bottom:20px;
+  }
+  .list_head_blog{
+    background: #607d8b;
+    color:#fff;
+  }
+  .dte_field_clr{
+    color:#e21e24;
+  }
+  .view_blg_descrip{
+    font-size: 14px;
+  }
+  .view_img_blog_descrip{
+    width:100%;
+    height:300px;
+  }
+  .side_head_blog{
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .ful_descrip_blg p{
+    font-size: 14px;
+  }
+  .tag_s_view_blog a{
+    font-size: 18px;
+    color:#607d8d;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .enable_stus{
+    color: #15ec15;
+  }
+  .status_found_column ul{
+    padding:0px;
+  }
+  .status_found_column ul li{
+    list-style: none;
+  }
+  .status_found_column ul li p a{
+    color:#333;
+  }
+  .status_found_column ul li p i{
+    vertical-align: middle;
+    padding-right:5px;
+    color:#607d8b;
+  }
+  .status_clmn{
+    width:70%;
+    float: left;
+  }
+  .edt_clmn{
+    width:15%;
+    float:left;
+  }
+}

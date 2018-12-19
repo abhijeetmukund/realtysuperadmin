@@ -1,0 +1,53 @@
+.active {
+    border-bottom: 3px solid #607d8b;
+}
+.loader{
+	margin-top: 15px !important;
+}
+.spinner{
+	margin: 0 auto !important;
+}
+.mlsTbl .mat-header-cell{
+	background: #607d8b;
+	color: #fff;
+	text-align: center;
+}
+.tbl{
+	width: 1069px;
+	overflow-x: auto;
+}
+.picked{
+	cursor: pointer;
+}
+.dspnon{
+	display: none;
+}
+.upBtn{
+	padding: 0px;
+	margin-right: -4px;
+	margin-left: -3px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+.upSpan{
+	width: 40px;
+}
+upBtn:hover{
+	background: #fff;
+}
+.btnCard{
+	text-align: right;
+    padding: 10px;
+    border: none;
+    border-radius: inherit;
+	box-shadow: none;
+	padding-right: 20px;
+}
+.btnCard button{
+	background: #607d8b;
+	color: #fff;
+}
+.btnCard button:nth-child(1){
+	margin-right: 25px;
+}

@@ -1,0 +1,55 @@
+.add_blog_new_admin{
+  box-shadow: 1px 1px 3px 1px #ccc;
+  height: auto;
+  padding: 10px 50px;
+  background: #fff;
+  margin-top: 15px;
+  .example-full-width{
+    width:100%;
+  }
+  .add_blog_head{
+    font-size: 23px;
+    font-weight: 600;
+  }
+  .ck_edit_blog_admin{
+    margin:15px 0px;
+  }
+  .add_blog_field_list{
+    padding:0px 20%;
+  }
+  .upld_icon{
+    color:#fff;
+    padding-right:5px;
+    vertical-align: middle;
+  }
+  .upld_btn_file button{
+    background: #607d8b;
+    color: #fff;
+    border: 0px;
+    width: 100%;
+    text-align: left;
+    font-weight: 700;
+    outline: 0px;
+    padding: 5px 10px;
+    margin:15px 0px;
+  }
+  .save_btn_chge_pas_wrd{
+    background: #e21e24;
+    color:#fff;
+    padding:0px 25px;
+    border:0px;
+    outline: 0px;
+    margin-right:40px;
+    border-radius:3px;
+    margin-bottom:10px;
+  }
+  .cncl_btn_chge_pas_wrd{
+    background: #607d8b;
+    color:#fff;
+    padding:0px 20px;
+    border:0px;
+    outline: 0px;
+    border-radius:3px;
+    margin-bottom:10px;
+  }
+}

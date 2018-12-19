@@ -1,0 +1,217 @@
+<div class="container-fluid">
+	<div class="row"> 				 
+		<div class="col-sm-3 col-md-2">
+			<div>
+				<div class="subLeftNavbar">
+					<!-- <ul> 
+						<li><a routerLink="multi-listing-services" class="activeLeft">Listing Type</a></li>
+						<li><a routerLink="/user-type" >User Type</a></li>
+						<li><a routerLink="/service-type" >Service Type</a></li>
+						<li><a routerLink="/property-type" >Property Type</a></li>
+					</ul> -->
+				</div>
+			</div> 
+		</div>
+			
+		<div class="col-sm-9 col-md-10">
+			<div class="sub_mainSection listing_sub_mainSection">
+				<div class="sub_header_contnr">
+					<ul>
+						<li><a class="activePlan">Lead Management</a></li>
+					</ul>
+				</div>
+				<div class="action_section">
+					<div class="listingName">
+						<h4>Lead Management</h4>
+					</div>
+					<div class="countrySelection">
+						<mat-form-field>
+							<mat-select placeholder="Choose Country" [(ngModel)]="countrySelected">
+							<mat-option *ngFor="let country of countryList" [value]="country.cctld" (click)="changeCountry(countrySelected)">
+								{{country.countryname}}
+							</mat-option>
+							</mat-select> 
+						</mat-form-field>
+					</div>
+					<div class="all_function_icon">
+						<ul>
+							<li><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilter($event.target.value)" [(ngModel)]="searchString" class="find_prpty"></li>
+						</ul>
+						<ul class="filter_section">
+							<li class="filterIcons" (click)="openModal()"><span><i class="fa fa-trash" aria-hidden="true"></i></span><span>Delete</span></li>
+							<li class="filterIcons" routerLink="/edit"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li>
+							<li class="filterIcons"><span><i class="fa fa-filter"></i></span><span>Import</span></li>
+							<li><button (click)="uploadFiles()" class="upBtn"><span class="upSpan">Upload</span></button></li>
+							<li class="filterIcons"><a href="https://www.realtymonk.com/api/freelisting/export"><span><i class="fa fa-download"></i></span><span>Download</span></a></li>
+							<li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
+							<li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li>
+							<li class="dspnon"><input type="file" accept=".xlsx, .xls, .csv" (change)="getFileDetails($event)" id="picked" #picked /></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="isLoading" class="loader">
+				<mat-spinner class="spinner"></mat-spinner>
+			</div>
+
+			<div class="tbl">
+				<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mlsTbl" width="100%">
+					<ng-container matColumnDef="select" sticky class="stickyClass">
+						<th mat-header-cell *matHeaderCellDef></th>
+						<td mat-cell *matCellDef="let row">
+							<mat-checkbox (click)="$event.stopPropagation()"
+										  (change)="$event ? selection.toggle(row) : null"
+										  [checked]="selection.isSelected(row)">
+							</mat-checkbox>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="lead_id" sticky class="stickyClass">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Id </th>
+						<td mat-cell *matCellDef="let user"> {{user.lead_id}} </td>
+					</ng-container>
+				
+					<ng-container matColumnDef="property_unique_id" sticky class="stickyClass">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Unique&nbsp;Id </th>
+						<td mat-cell *matCellDef="let user"> {{user.property_unique_id}} </td>
+					</ng-container>
+				
+					<ng-container matColumnDef="property_id" sticky class="stickyClass">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;Id </th>
+						<td mat-cell *matCellDef="let user"> {{user.receiver_id}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="user_id" sticky class="stickyClass">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> User&nbsp;Id </th>
+						<td mat-cell *matCellDef="let user"> {{user.user_id}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="sender_id" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Sender&nbsp;Id </th>
+						<td mat-cell *matCellDef="let user"> {{user.sender_id}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="leads_status_id" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Status&nbsp;Id </th>
+						<td mat-cell *matCellDef="let user"> {{user.leads_status_id}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="name" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+						<td mat-cell *matCellDef="let user"> {{user.name}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="email" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+						<td mat-cell *matCellDef="let user"> {{user.email}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="mobileno" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile No </th>
+						<td mat-cell *matCellDef="let user"> {{user.mobileno}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="type" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+						<td mat-cell *matCellDef="let user"> {{user.type}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="applied_date1" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Applied&nbsp;Date1 </th>
+						<td mat-cell *matCellDef="let user"> {{user.applied_date1}} </td>
+					</ng-container>
+					
+					<ng-container matColumnDef="applied_date" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Applied&nbsp;Date </th>
+						<td mat-cell *matCellDef="let user"> {{user.applied_date}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="lead_ip_address" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;IP&nbsp;Address </th>
+						<td mat-cell *matCellDef="let user"> {{user.lead_ip_address}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="reported_as_broker_status" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Reported&nbsp;as&nbsp;Broker&nbsp;Status </th>
+						<td mat-cell *matCellDef="let user"> {{user.reported_as_broker_status}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="leads_score" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Score </th>
+						<td mat-cell *matCellDef="let user"> {{user.leads_score}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="calls" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Calls </th>
+						<td mat-cell *matCellDef="let user"> {{user.calls}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="lead_prefer_timings" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Prefer&nbsp;Timings </th>
+						<td mat-cell *matCellDef="let user"> {{user.lead_prefer_timings}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="lead_prefer_bhk" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Prefer&nbsp;BHK </th>
+						<td mat-cell *matCellDef="let user"> {{user.lead_prefer_bhk}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="lead_prefer_location" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Prefer&nbsp;Location </th>
+						<td mat-cell *matCellDef="let user"> {{user.lead_prefer_location}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="lead_prefer_budget" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Prefer&nbsp;Budget </th>
+						<td mat-cell *matCellDef="let user"> {{user.lead_prefer_budget}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="lead_prefer_service_type" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Prefer&nbsp;Service&nbsp;Type </th>
+						<td mat-cell *matCellDef="let user"> {{user.lead_prefer_service_type}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="property_suggested" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;Suggested </th>
+						<td mat-cell *matCellDef="let user"> {{user.property_suggested}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="property_visited1" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;Visited&nbsp;1 </th>
+						<td mat-cell *matCellDef="let user"> {{user.property_visited1}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="property_visited2" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;Visited&nbsp;2 </th>
+						<td mat-cell *matCellDef="let user"> {{user.property_visited2}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="property_visited3" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;Visited&nbsp;3 </th>
+						<td mat-cell *matCellDef="let user"> {{user.property_visited3}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="allocate_person" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Allocate&nbsp;Person </th>
+						<td mat-cell *matCellDef="let user"> {{user.allocate_person}} </td>
+					</ng-container>
+
+					<ng-container matColumnDef="visited_date" class="noSticky">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Visited&nbsp;Date </th>
+						<td mat-cell *matCellDef="let user"> {{user.visited_date}} </td>
+					</ng-container>
+				
+					<tr mat-header-row *matHeaderRowDef="displayedColumns" class="noSticky"></tr>
+					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+				</table>
+			</div>
+			<mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+			<mat-card class="btnCard">
+				<button mat-button (click)="pagePrevious(searchString)">Previous</button>
+				<button mat-button (click)="pageNext(searchString)">Next</button>
+			</mat-card>
+			
+	 	</div>
+	</div>
+</div>

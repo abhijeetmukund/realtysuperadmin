@@ -1,0 +1,72 @@
+<div class="container-fluid">
+<!-- subheader --------- -->
+  <div class="row"> 
+  	     <!-- sub sidebar  -->
+	<div class="col-sm-3 col-md-2">
+	 	<div>
+			<div  class="subLeftNavbar">
+					<ul> 
+						<li><a routerLink="multi-listing-services" class="activeLeft">Listing Type</a></li>
+						<li><a routerLink="/user-type" >User Type</a></li>
+						<li><a routerLink="/service-type" >Service Type</a></li>
+						<li><a routerLink="/property-type" >Property Type</a></li>
+					</ul>
+				</div>
+     </div> 
+	 </div>
+		<!-- sub sidebar end -->
+	  <div class="col-sm-9 col-md-10">
+         <div class="sub_mainSection listing_sub_mainSection">
+			<div class="sub_header_contnr">
+				<ul>
+					<li><a routerLink="/multi-listing-services" class="activePlan">Free Listing</a></li>
+					<li><a routerLink="/premium-listing">Premium Listing</a></li>
+					<li><a routerLink="/express-tenancy">Express Tenancy</a></li>
+					<li><a routerLink="/elite-listing">Elite Listing</a></li>
+					<li><a routerLink="/add-subscription">Add Subscription</a></li>
+				</ul>
+			</div>
+			
+		</div>
+     <div class="chng_pass_word">
+		  <form>
+		    <div class="row">
+		      <div class="col-sm-12 act_setngs">
+		        <p class="text-center chne_pass_wrd_head">Add Subscription</p>
+		        <mat-form-field class="example-full-width">
+		          <mat-select placeholder="Listing Type">
+		            <mat-option *ngFor="let listing of listings" [value]="listing.value">
+		              {{listing.viewValue}}
+		            </mat-option>
+		          </mat-select>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <textarea matInput placeholder="Description"></textarea>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="No. Of Post" value="">
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="List Duration" value="">
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <mat-select placeholder="Status">
+		            <mat-option *ngFor="let status of statuss" [value]="status.value">
+		              {{status.viewValue}}
+		            </mat-option>
+		          </mat-select>
+		        </mat-form-field>
+		        <mat-form-field class="example-full-width">
+		          <input matInput placeholder="Listing Price" value="">
+		        </mat-form-field>
+		        <div class="text-center">
+		          <button mat-button class="save_btn_chge_pas_wrd">Save</button>
+		          <button mat-button type="reset" class="cncl_btn_chge_pas_wrd">Reset</button>
+		        </div>
+		      </div>
+		      </div>
+		  </form>
+		</div>
+	 </div>
+   </div>
+</div>

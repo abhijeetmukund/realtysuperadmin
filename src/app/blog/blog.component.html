@@ -1,0 +1,103 @@
+
+  <div class="row"> 
+  <div class="col-sm-3 col-md-2">
+    <div>
+      <div class="subLeftNavbar">
+          <ul>
+            <li><a routerLink="/blogs" class="activeLeft">Add Blogs</a></li>
+            <li><a routerLink="/view-blogs" >View Blogs</a></li>
+          </ul>
+        </div>
+     </div> 
+   </div>
+    <!-- sub sidebar end -->
+<div class="col-sm-9 col-md-10">
+<div class="add_blog_new_admin">
+  <form>
+    <div class="row">
+      <div class="col-sm-12 act_setngs">
+        <p class="text-center add_blog_head">Add New Blog</p>
+        <div class="add_blog_field_list">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Heading" value="">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Main Description"></textarea>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="upld_btn_file">
+            <button md-raised-button class="" color="primary" (click)="fileInput.click()"><i class="material-icons upld_icon">cloud_upload</i>Add Image</button>
+            <input hidden type="file" #fileInput multiple>
+          </div>
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Status">
+              <mat-option *ngFor="let status of statuss" [value]="status.value">
+                {{status.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="ck_edit_blog_admin">
+          <ck-editor name="editor1" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Keyword-1" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Url for Keyword-1" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Keyword-2" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Url for Keyword-2" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Keyword-3" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Url for Keyword-3" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Keyword-4" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Url for Keyword-4" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- <mat-form-field class="example-full-width"> -->
+
+        <!-- </mat-form-field> -->
+
+        <div class="text-center">
+          <button mat-button class="save_btn_chge_pas_wrd">Save</button>
+          <button mat-button class="cncl_btn_chge_pas_wrd">Cancel</button>
+        </div>
+      </div>
+      </div>
+  </form>
+</div>
+</div>
+</div>

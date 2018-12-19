@@ -1,0 +1,143 @@
+<div class="container-fluid">
+  <div class="row">     
+    <div class="col-sm-3 col-md-2">
+      <div>
+        <div class="subLeftNavbar">
+            <!-- <ul> 
+              <li><a routerLink="/multi-listing-services" class="activeLeft">Listing Type</a></li>
+              <li><a routerLink="/user-type">User Type</a></li>
+              <li><a routerLink="/service-type" >Service Type</a></li>
+              <li><a routerLink="/property-type" >Property Type</a></li>
+            </ul> -->
+          </div>
+      </div>
+    </div>
+    
+	  <div class="col-sm-9 col-md-10">
+      <div class="sub_mainSection listing_sub_mainSection">
+        <div class="sub_header_contnr">
+          <ul>
+            <li><a>Packers and Movers</a></li>
+            <!-- <li><a (click)="planNext('all')">All Listing</a></li> -->
+            <!-- <li *ngFor="let user of users" (click)="planNext(user.premium_plan_id)" [ngClass]="user.premium_plan_id === activeElement ? 'active' : 'none'"><a>{{ user.premium_name }}</a></li> -->
+          </ul>
+        </div>
+        <div class="action_section">
+          <div class="listingName">
+            <h4>Packers and Movers</h4>
+          </div>
+          <div class="all_function_icon">
+            <ul>
+              <li><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilterPlan($event.target.value)" [(ngModel)]="searchString" class="find_prpty"></li>
+            </ul>
+            <ul class="filter_section">
+              <li class="filterIcons" (click)="openModal()"><span><i class="fa fa-trash" aria-hidden="true"></i></span><span>Delete</span></li>
+              <li class="filterIcons" (click)="openPackersEditPopup()"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li>
+              <li class="filterIcons"><label for="picked" class="picked"><span><i class="fa fa-filter"></i></span><span>Import</span></label></li>
+              <li><button (click)="uploadFiles()" class="upBtn"><span class="upSpan">Upload</span></button></li>
+              <li class="filterIcons"><a href="https://www.realtymonk.com/websapi/freelisting/export"><span><i class="fa fa-download"></i></span><span>Download</span></a></li>
+              <li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
+              <li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li>
+              <li class="dspnon"><input type="file" accept=".xlsx, .xls, .csv" (change)="getFileDetails($event)" id="picked" #picked /></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="isLoading" class="loader">
+        <mat-spinner class="spinner"></mat-spinner>
+      </div>
+
+      <!-- <ng-daterangepicker [(ngModel)]="dateRange" [options]="options"></ng-daterangepicker>
+      {{dateRange}} -->
+
+      <!-- <input type="text" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" (change)='applyFilterPlanDate($event.target.value)' [(ngModel)]="date" />
+      {{date}}   -->
+
+      <div class="tbl">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table-striped mlsTbl" width="100%">
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let emp">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)"
+                            (click)="populateForm(emp)"
+              >
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="packer_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Packers&nbsp;ID </th>
+            <td mat-cell *matCellDef="let user"> {{user.packer_id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="packer_unique_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Packer&nbsp;Unique&nbsp;By </th>
+            <td mat-cell *matCellDef="let user"> {{user.packer_unique_id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="packer_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Packer&nbsp;Name </th>
+            <td mat-cell *matCellDef="let user"> {{user.packer_name}} </td>
+          </ng-container> 
+
+          <ng-container matColumnDef="packer_email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Packer&nbsp;Email </th>
+            <td mat-cell *matCellDef="let user"> {{user.packer_email}} </td>
+          </ng-container> 
+
+          <ng-container matColumnDef="packer_mobile">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Packer&nbsp;Mobile </th>
+            <td mat-cell *matCellDef="let user"> {{user.packer_mobile}} </td>
+          </ng-container> 
+
+          <ng-container matColumnDef="packer_location_from">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Packer&nbsp;Location&nbsp;From </th>
+            <td mat-cell *matCellDef="let user"> {{user.packer_location_from}} </td>
+          </ng-container> 
+
+          <ng-container matColumnDef="packer_location_to">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Packer&nbsp;Location&nbsp;To </th>
+            <td mat-cell *matCellDef="let user"> {{user.packer_location_to}} </td>
+          </ng-container> 
+
+          <ng-container matColumnDef="contacted_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Contacted&nbsp;Date</th>
+            <td mat-cell *matCellDef="let user"> {{user.contacted_date}} </td>
+          </ng-container> 
+
+          <ng-container matColumnDef="VehicleNo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Vehicle No</th>
+            <td mat-cell *matCellDef="let user"> {{user.VehicleNo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="VehicleType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Vehicle&nbsp;Type</th>
+            <td mat-cell *matCellDef="let user"> {{user.VehicleType}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="DriverName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Driver&nbsp;Name</th>
+            <td mat-cell *matCellDef="let user"> {{user.DriverName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="payment">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Payment</th>
+            <td mat-cell *matCellDef="let user"> {{user.payment}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+      <mat-card class="btnCard">
+        <button mat-button (click)="pagePrevious(searchString)">Previous</button>
+        <button mat-button (click)="pageNext(searchString)">Next</button>
+      </mat-card>
+
+    </div>
+  </div>
+</div>

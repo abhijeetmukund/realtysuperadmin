@@ -1,0 +1,72 @@
+.loader{
+	margin-top: 15px !important;
+}
+.spinner{
+	margin: 0 auto !important;
+}
+.mlsTbl{
+	max-height: 350px !important;
+	height: 100%;
+	overflow: auto;   
+    width: 1123px;
+}
+
+.mlsTbl .mat-header-cell{
+	background: #607d8b;
+	color: #fff;
+	text-align: center;
+	padding: 0px 21px !important;
+}
+.tbl{
+	width: 1069px;
+	overflow-x: auto;
+}
+.stickyClass{
+	z-index: 999 !important;
+}
+.noSticky{
+	z-index: -999 !important;
+}
+.mlsTbl tr:nth-child(odd){
+	background: #f0f8ff;
+}
+.picked{
+	cursor: pointer;
+}
+.dspnon{
+	display: none;
+}
+.upBtn{
+	padding: 0px;
+	margin-right: -4px;
+	margin-left: -3px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+.upSpan{
+	width: 40px;
+}
+upBtn:hover{
+	background: #fff;
+}
+.btnCard{
+	text-align: right;
+    padding: 10px;
+    border: none;
+    border-radius: inherit;
+	box-shadow: none;
+	padding-right: 20px;
+}
+.btnCard button{
+	background: #607d8b;
+	color: #fff;
+}
+.btnCard button:nth-child(1){
+	margin-right: 25px;
+}
+.countrySelection{
+	display: inline;
+    position: relative;
+    left: 280px;
+}
