@@ -71,9 +71,26 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { PackerseditComponent } from './packersedit/packersedit.component';
 import { LoginComponent } from './login/login.component';
 import {MatIconModule} from '@angular/material/icon';
-import { AuthGuardService } from './auth/auth-guard.service';
 import { ToastrModule } from 'ngx-toastr';
 import { DataService } from './data.service';
+import { LogComponent } from './log/log.component';
+import {NgXDonutChartModule} from 'ngx-donutchart';
+import { SubmenuComponent } from './submenu/submenu.component';
+import { PackersaddComponent } from './packersadd/packersadd.component';
+import { AdduserComponent } from './adduser/adduser.component';
+import { ErrorpageComponent } from './errorpage/errorpage.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { ProductManagementComponent } from './product-management/product-management.component';
+import { ShippingManagementComponent } from './shipping-management/shipping-management.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { FaqManagementComponent } from './faq-management/faq-management.component';
+import { BlockCopyPasteDirective } from './changepassword/block-copy-paste.directive';
+import { LeadaddComponent } from './leadadd/leadadd.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { EditleadComponent } from './editlead/editlead.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {NgAutoCompleteModule} from "ng-auto-complete";
 
 @NgModule({ 
   declarations: [
@@ -116,6 +133,20 @@ import { DataService } from './data.service';
     ChangepasswordComponent,
     PackerseditComponent,
     LoginComponent,
+    LogComponent,
+    SubmenuComponent,
+    PackersaddComponent,
+    AdduserComponent,
+    ErrorpageComponent,
+    ProductManagementComponent,
+    ShippingManagementComponent,
+    TermsConditionsComponent,
+    FaqManagementComponent,
+    BlockCopyPasteDirective,
+    LeadaddComponent,
+    ForgotpasswordComponent,
+    EditleadComponent,
+    UserdetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -152,12 +183,15 @@ import { DataService } from './data.service';
     NgxMatDrpModule,
     GooglePlaceModule,
     MatIconModule,
+    NgXDonutChartModule,
+    MatTreeModule,
+    MatAutocompleteModule,
+    NgAutoCompleteModule,
     ToastrModule.forRoot()
   ],
-  entryComponents: [PopupComponent, EditComponent, PackerseditComponent],
+  entryComponents: [PopupComponent, EditComponent, PackerseditComponent, PackersaddComponent, UserProfileComponent, LeadaddComponent, EditleadComponent, UserdetailsComponent],
   providers: [
     HeaderComponent,
-    AuthGuardService,
     DataService
   ],
   bootstrap: [AppComponent]

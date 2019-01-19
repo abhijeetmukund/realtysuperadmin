@@ -1,0 +1,169 @@
+<div class="packs_mvs_sec_tion" id="packs_mvs_sec_tion">
+  <form #form="ngForm" autocomplete="off">
+      <div class="ad_pack_ers">Add New Lead</div>
+      <div class="btnCancel">
+    <button mat-button click="cancelAddPopup()" id="">X</button>
+  </div>
+     <div class="pack_bdy_list">
+      <div class="row">
+          <div class="col-sm-3">
+              <div class="form-group">
+                <label>Property ID</label>
+                <input [(ngModel)]="addLead.receiver_id" name="receiver_id" class="form-control" required>
+                <!-- <div class="validation-error" *ngIf="packer_name.invalid && packer_name.touched">This field is required.</div> -->
+            </div>
+          </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label>Name</label>
+            <input [(ngModel)]="addLead.name" name="name" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label>Email</label>
+            <input [(ngModel)]="addLead.email" name="email" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label>Mobile No</label>
+            <input [(ngModel)]="addLead.mobileno" name="mobileno" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+          <label>Portal Details</label>
+          <input [(ngModel)]="addLead.portal_details" name="portal_details" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="form-group">
+           <label>Applied Date</label>
+           <input [(ngModel)]="addLead.applied_date" name="applied_date" class="form-control">
+         </div>
+       </div>
+         <div class="col-sm-3">
+            <div class="form-group">
+            <label>No of Calls</label>
+            <input [(ngModel)]="addLead.calls" name="calls" class="form-control">
+          </div>
+        </div>
+         <div class="col-sm-3">
+           <div class="form-group">
+            <label>Lead Prefer Call Timings</label>
+            <input [(ngModel)]="addLead.lead_prefer_timings" name="lead_prefer_timings" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+           <div class="form-group">
+            <label>Lead Prefer BHK</label>
+            <input [(ngModel)]="addLead.lead_prefer_bhk" name="lead_prefer_bhk" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+           <div class="form-group">
+            <label>Lead Prefer Location</label>
+            <input [(ngModel)]="addLead.lead_prefer_location" name="lead_prefer_location" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+           <div class="form-group">
+            <label>Lead Prefer Budget</label>
+            <input [(ngModel)]="addLead.lead_prefer_budget" name="lead_prefer_budget" class="form-control">
+          </div>
+        </div>
+          <div class="col-sm-3">
+              <div class="form-group">
+              <label>Lead Prefer Service Type</label>
+              <input [(ngModel)]="addLead.lead_prefer_service_type" name="lead_prefer_service_type" class="form-control">
+            </div>
+          </div>
+          <div class="col-sm-3">
+              <div class="form-group">
+                <label>Visting Time</label>
+                <input [(ngModel)]="addLead.visting_time" name="visting_time" class="form-control">
+              </div>
+            </div>
+        <div class="col-sm-3">
+             <div class="form-group">
+            <label>Property Suggested</label>
+            <input [(ngModel)]="addLead.property_suggested" name="property_suggested" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label>Property Visited 1</label>
+            <input [(ngModel)]="addLead.property_visited1" name="property_visited1" class="form-control">
+          </div>
+        </div>
+         <div class="col-sm-3">
+          <div class="form-group">
+            <label>Property Visited 2</label>
+            <input [(ngModel)]="addLead.property_visited2" name="property_visited2" class="form-control">
+          </div>
+        </div>
+         <div class="col-sm-3">
+            <div class="form-group">
+            <label>Property Visited 3</label>
+            <input [(ngModel)]="addLead.property_visited3" name="property_visited3" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+            <label>Allocate Person</label>
+            <input [(ngModel)]="addLead.allocate_person" name="allocate_person" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+              <label>Allocation Person Email</label>
+              <input [(ngModel)]="addLead.allocationpersonemail" name="allocationpersonemail" class="form-control">
+            </div>
+          </div>
+          <div class="col-sm-3">
+              <div class="form-group">
+                <label>Allocation Person Phone No</label>
+                <input [(ngModel)]="addLead.allocationpersonphoneno" name="allocationpersonphoneno" class="form-control">
+              </div>
+            </div>
+         <div class="col-sm-3">
+           <div class="form-group">
+            <label>Visited Date</label>
+            <input [(ngModel)]="addLead.visited_date" name="visited_date" class="form-control">
+          </div>
+        </div>
+
+         <div class="col-sm-3">
+           <div class="form-group">
+            <label>Follow Up 1</label>
+            <input [(ngModel)]="addLead.follow_up1" name="follow_up1" class="form-control">
+          </div>
+        </div>
+         <div class="col-sm-3">
+          <div class="form-group">
+            <label>Follow Up 2</label>
+            <input [(ngModel)]="addLead.follow_up2" name="follow_up2" class="form-control">
+          </div>
+        </div>
+         <div class="col-sm-3">
+            <div class="form-group">
+            <label>Follow Up 3</label>
+            <input [(ngModel)]="addLead.follow_up3" name="follow_up3" class="form-control">
+          </div>
+        </div>
+         <div class="col-sm-3">
+           <div class="form-group">
+            <label>Status</label>
+            <input [(ngModel)]="addLead.status" name="status" class="form-control">
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="text-center btnGrp">
+          <button mat-button type="button" mat-dialog-close class="" [disabled]="form.invalid" class="save_btn_chge_pas_wrd" (click)="addLeads()">SUBMIT</button>
+          <button mat-button class="cncl_btn_chge_pas_wrd" mat-dialog-close>Cancel</button>
+      </div>
+    </form>
+</div>

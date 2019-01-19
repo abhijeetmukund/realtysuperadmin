@@ -1,70 +1,424 @@
 <div class="container-fluid">
-	<div class="row"> 				 
-		<div class="col-sm-3 col-md-2">
-			<div>
-				<div class="subLeftNavbar">
-					<!-- <ul> 
-						<li><a routerLink="multi-listing-services" class="activeLeft">Listing Type</a></li>
-						<li><a routerLink="/user-type" >User Type</a></li>
-						<li><a routerLink="/service-type" >Service Type</a></li>
-						<li><a routerLink="/property-type" >Property Type</a></li>
-					</ul> -->
-				</div>
-			</div> 
-		</div>
+	<div class="row">
 			
-		<div class="col-sm-9 col-md-10">
+		<div class="col-sm-12 col-md-12">
 			<div class="sub_mainSection listing_sub_mainSection">
 				<div class="sub_header_contnr">
-					<ul>
-						<li><a class="activePlan">Lead Management</a></li>
-					</ul>
+						<ul>
+							<li><a class="ld_mnge">Lead Management</a></li>
+						</ul>
+						
+						<div class="dte_range_picke">
+							<i class="material-icons">calendar_today</i>
+							<input placeholder="Select Date Range" matInput ngxDaterangepickerMd
+							startKey="start" endKey="end" [(ngModel)]="dateSelected" name="daterange"
+							(change)='applyDate(dateSelected)' autocomplete="off"/>
+						</div>
 				</div>
 				<div class="action_section">
 					<div class="listingName">
 						<h4>Lead Management</h4>
-					</div>
+					</div>	
 					<div class="countrySelection">
-						<mat-form-field>
-							<mat-select placeholder="Choose Country" [(ngModel)]="countrySelected">
-							<mat-option *ngFor="let country of countryList" [value]="country.cctld" (click)="changeCountry(countrySelected)">
-								{{country.countryname}}
-							</mat-option>
-							</mat-select> 
-						</mat-form-field>
-					</div>
+							<mat-form-field class="example-full-width" [floatLabel]="'never'">
+								<input type="hidden" [(ngModel)]="countrySelected"  name="cctld" value="{{countrySelected}}">
+								<input type="text" placeholder="Enter Country" [(ngModel)]="selectedCountry" name="fieldName" ngDefaultControl matInput [matAutocomplete]="auto" [formControl]="myControl" value="{{selectedCountry}}">
+								<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" name="fieldName" ngDefaultControl>
+									<mat-option *ngFor="let option of filteredOptions | async" [value]="option.countryname" (onSelectionChange)="onKeydown($event,option.cctld)" id="chooseCountry">
+										{{option.countryname}}
+									</mat-option>
+								</mat-autocomplete>
+							</mat-form-field>
+            </div>			
 					<div class="all_function_icon">
-						<ul>
-							<li><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilter($event.target.value)" [(ngModel)]="searchString" class="find_prpty"></li>
-						</ul>
+					 <ul>
+							<li class="all_fnshn"><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilter($event.target.value)" [(ngModel)]="searchString" class="find_prpty"></li>
+						</ul>		
 						<ul class="filter_section">
-							<li class="filterIcons" (click)="openModal()"><span><i class="fa fa-trash" aria-hidden="true"></i></span><span>Delete</span></li>
-							<li class="filterIcons" routerLink="/edit"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li>
-							<li class="filterIcons"><span><i class="fa fa-filter"></i></span><span>Import</span></li>
-							<li><button (click)="uploadFiles()" class="upBtn"><span class="upSpan">Upload</span></button></li>
-							<li class="filterIcons"><a href="https://www.realtymonk.com/api/freelisting/export"><span><i class="fa fa-download"></i></span><span>Download</span></a></li>
-							<li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
-							<li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li>
-							<li class="dspnon"><input type="file" accept=".xlsx, .xls, .csv" (change)="getFileDetails($event)" id="picked" #picked /></li>
+							<li class="filterIcons" (click)="addLeadPopup()"><span><i class="material-icons add_dtl_icons">note_add</i></span><span>Add</span></li>
+							<li class="filterIcons" (click)="showDeletePopUp()"><span><i class="fa fa-trash" aria-hidden="true"></i></span><span>Delete</span></li>
+							<li class="filterIcons" (click)="editRespPopup($event)"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li>
+							<li class="filterIcons" ><label for="picked" class="picked"><span><i class="fa fa-filter"></i></span><span>Import</span></label></li>
+							<li class="filterIcons"><a href="https://www.realtymonk.com/websapi/leadmanagement/export"><span><i class="fa fa-download"></i></span><span>Download</span></a></li>
+							<!-- <li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
+							<li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li> -->
+							<li class="dspnon"><input type="file" accept=".xlsx, .xls, .csv" (change)="getFileDetails($event);uploadFiles()" id="picked" #picked /></li>
+							<li class="filterIcons" (click)="refreshData()"><span><i  class="material-icons refresh_icon">refresh</i></span><span>Refresh</span></li>
 						</ul>
+					</div>
+					<!-- -----------------------add lead popup-------------------------- -->
+					<div class="addlead" id="disply_leadAdd">
+						<div class="packs_mvs_sec_tion">
+							<form #form="ngForm" autocomplete="off">
+									<div class="ad_pack_ers">Add New Lead</div>
+									<div class="btnCancel">
+								<button mat-button (click)="cancelAddPopup()">X</button>
+							</div>
+								 <div class="pack_bdy_list">
+									<div class="row">
+											<div class="col-sm-3">
+													<div class="form-group">
+														<label>Property ID</label>
+														<input [(ngModel)]="addLead.receiver_id" name="receiver_id" class="form-control" required>
+														<!-- <div class="validation-error" *ngIf="packer_name.invalid && packer_name.touched">This field is required.</div> -->
+												</div>
+											</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<label>Name</label>
+												<input [(ngModel)]="addLead.name" name="name" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<label>Email</label>
+												<input [(ngModel)]="addLead.email" name="email" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<label>Mobile No</label>
+												<input [(ngModel)]="addLead.mobileno" name="mobileno" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+											<label>Portal Details</label>
+											<input [(ngModel)]="addLead.portal_details" name="portal_details" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-3">
+											<div class="form-group">
+											 <label>Applied Date</label>
+											 <input [(ngModel)]="addLead.applied_date" name="applied_date" class="form-control">
+										 </div>
+									 </div>
+										 <div class="col-sm-3">
+												<div class="form-group">
+												<label>No of Calls</label>
+												<input [(ngModel)]="addLead.calls" name="calls" class="form-control">
+											</div>
+										</div>
+										 <div class="col-sm-3">
+											 <div class="form-group">
+												<label>Lead Prefer Call Timings</label>
+												<input [(ngModel)]="addLead.lead_prefer_timings" name="lead_prefer_timings" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											 <div class="form-group">
+												<label>Lead Prefer BHK</label>
+												<input [(ngModel)]="addLead.lead_prefer_bhk" name="lead_prefer_bhk" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											 <div class="form-group">
+												<label>Lead Prefer Location</label>
+												<input [(ngModel)]="addLead.lead_prefer_location" name="lead_prefer_location" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											 <div class="form-group">
+												<label>Lead Prefer Budget</label>
+												<input [(ngModel)]="addLead.lead_prefer_budget" name="lead_prefer_budget" class="form-control">
+											</div>
+										</div>
+											<div class="col-sm-3">
+													<div class="form-group">
+													<label>Lead Prefer Service Type</label>
+													<input [(ngModel)]="addLead.lead_prefer_service_type" name="lead_prefer_service_type" class="form-control">
+												</div>
+											</div>
+											<div class="col-sm-3">
+													<div class="form-group">
+														<label>Visting Time</label>
+														<input [(ngModel)]="addLead.visting_time" name="visting_time" class="form-control">
+													</div>
+												</div>
+										<div class="col-sm-3">
+												 <div class="form-group">
+												<label>Property Suggested</label>
+												<input [(ngModel)]="addLead.property_suggested" name="property_suggested" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<label>Property Visited 1</label>
+												<input [(ngModel)]="addLead.property_visited1" name="property_visited1" class="form-control">
+											</div>
+										</div>
+										 <div class="col-sm-3">
+											<div class="form-group">
+												<label>Property Visited 2</label>
+												<input [(ngModel)]="addLead.property_visited2" name="property_visited2" class="form-control">
+											</div>
+										</div>
+										 <div class="col-sm-3">
+												<div class="form-group">
+												<label>Property Visited 3</label>
+												<input [(ngModel)]="addLead.property_visited3" name="property_visited3" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+												<div class="form-group">
+												<label>Allocate Person</label>
+												<input [(ngModel)]="addLead.allocate_person" name="allocate_person" class="form-control">
+											</div>
+										</div>
+										<div class="col-sm-3">
+												<div class="form-group">
+													<label>Allocation Person Email</label>
+													<input [(ngModel)]="addLead.allocationpersonemail" name="allocationpersonemail" class="form-control">
+												</div>
+											</div>
+											<div class="col-sm-3">
+													<div class="form-group">
+														<label>Allocation Person Phone No</label>
+														<input [(ngModel)]="addLead.allocationpersonphoneno" name="allocationpersonphoneno" class="form-control">
+													</div>
+												</div>
+										 <div class="col-sm-3">
+											 <div class="form-group">
+												<label>Visited Date</label>
+												<input [(ngModel)]="addLead.visited_date" name="visited_date" class="form-control">
+											</div>
+										</div>
+						
+										 <div class="col-sm-3">
+											 <div class="form-group">
+												<label>Follow Up 1</label>
+												<input [(ngModel)]="addLead.follow_up1" name="follow_up1" class="form-control">
+											</div>
+										</div>
+										 <div class="col-sm-3">
+											<div class="form-group">
+												<label>Follow Up 2</label>
+												<input [(ngModel)]="addLead.follow_up2" name="follow_up2" class="form-control">
+											</div>
+										</div>
+										 <div class="col-sm-3">
+												<div class="form-group">
+												<label>Follow Up 3</label>
+												<input [(ngModel)]="addLead.follow_up3" name="follow_up3" class="form-control">
+											</div>
+										</div>
+										 <div class="col-sm-3">
+											 <div class="form-group">
+												<label>Status</label>
+												<input [(ngModel)]="addLead.status" name="status" class="form-control">
+											</div>
+										</div>
+										</div>
+									</div>
+						
+									<div class="text-center btnGrp">
+											<button mat-button type="button" class="save_btn_chge_pas_wrd" (click)="addLeads()">SUBMIT</button>
+											<button mat-button class="cncl_btn_chge_pas_wrd" (click)="cancelAddPopup()">Cancel</button>
+									</div>
+								</form>
+						</div>
+					</div>
+					<!---------------------- end add lead popup-------------------------- -->
+				</div>
+			</div>
+			<div class="deleteConfirmation" id="deleteConfirmation">
+				<div class="delete_resbody">
+					<span>Are you sure you want to delete this lead?</span>
+					<div class="text-center btnGr">
+						<button mat-button type="button" class="save_btn_chge_pas_wrd" (click)="deleteLead()">Yes</button>
+						<button mat-button class="cncl_btn_chge_pas_wrd" (click)="cancelDelete()">No</button>
 					</div>
 				</div>
 			</div>
-
+			<div class="edit_response" id="editSection_respons">
+				<div class="edit_resbody">
+					<div class="packs_mvs_sec_tion">
+						<form #form="ngForm" autocomplete="off">
+							<div class="ad_pack_ers">Edit Lead</div>
+							<div class="btnCancel">
+								<button mat-button (click)="cancelResons()">X</button>
+							</div>
+					
+						   <div class="pack_bdy_list">
+							<div class="row">
+								<div class="col-sm-3">
+									<div class="form-group">
+										<input [(ngModel)]="editLead.lead_id" name="lead_id" type="hidden">
+									  <label>Property ID</label>
+									  <input [(ngModel)]="editLead.receiver_id" name="receiver_id" class="form-control" required>
+									  <!-- <div class="validation-error" *ngIf="packer_name.invalid && packer_name.touched">This field is required.</div> -->
+								  </div>
+								</div>
+							  <div class="col-sm-3">
+								<div class="form-group">
+								  <label>Name</label>
+								  <input [(ngModel)]="editLead.name" name="name" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								<div class="form-group">
+								  <label>Email</label>
+								  <input [(ngModel)]="editLead.email" name="email" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								<div class="form-group">
+								  <label>Mobile No</label>
+								  <input [(ngModel)]="editLead.mobileno" name="mobileno" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								<div class="form-group">
+								<label>Portal Details</label>
+								<input [(ngModel)]="editLead.portal_details" name="portal_details" class="form-control">
+							  </div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+								 <label>Applied Date</label>
+								 <input [(ngModel)]="editLead.applied_date" name="applied_date" class="form-control">
+							   </div>
+							 </div>
+							   <div class="col-sm-3">
+								  <div class="form-group">
+								  <label>No of Calls</label>
+								  <input [(ngModel)]="editLead.calls" name="calls" class="form-control">
+								</div>
+							  </div>
+							   <div class="col-sm-3">
+								 <div class="form-group">
+								  <label>Lead Prefer Call Timings</label>
+								  <input [(ngModel)]="editLead.lead_prefer_timings" name="lead_prefer_timings" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								 <div class="form-group">
+								  <label>Lead Prefer BHK</label>
+								  <input [(ngModel)]="editLead.lead_prefer_bhk" name="lead_prefer_bhk" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								 <div class="form-group">
+								  <label>Lead Prefer Location</label>
+								  <input [(ngModel)]="editLead.lead_prefer_location" name="lead_prefer_location" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								 <div class="form-group">
+								  <label>Lead Prefer Budget</label>
+								  <input [(ngModel)]="editLead.lead_prefer_budget" name="lead_prefer_budget" class="form-control">
+								</div>
+							  </div>
+								<div class="col-sm-3">
+									<div class="form-group">
+									<label>Lead Prefer Service Type</label>
+									<input [(ngModel)]="editLead.lead_prefer_service_type" name="lead_prefer_service_type" class="form-control">
+								  </div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+									  <label>Visting Time</label>
+									  <input [(ngModel)]="editLead.visting_time" name="visting_time" class="form-control">
+									</div>
+								  </div>
+							  <div class="col-sm-3">
+								   <div class="form-group">
+								  <label>Property Suggested</label>
+								  <input [(ngModel)]="editLead.property_suggested" name="property_suggested" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								<div class="form-group">
+								  <label>Property Visited 1</label>
+								  <input [(ngModel)]="editLead.property_visited1" name="property_visited1" class="form-control">
+								</div>
+							  </div>
+							   <div class="col-sm-3">
+								<div class="form-group">
+								  <label>Property Visited 2</label>
+								  <input [(ngModel)]="editLead.property_visited2" name="property_visited2" class="form-control">
+								</div>
+							  </div>
+							   <div class="col-sm-3">
+								  <div class="form-group">
+								  <label>Property Visited 3</label>
+								  <input [(ngModel)]="editLead.property_visited3" name="property_visited3" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								  <div class="form-group">
+								  <label>Allocate Person</label>
+								  <input [(ngModel)]="editLead.allocate_person" name="allocate_person" class="form-control">
+								</div>
+							  </div>
+							  <div class="col-sm-3">
+								  <div class="form-group">
+									<label>Allocation Person Email</label>
+									<input [(ngModel)]="editLead.allocationpersonemail" name="allocationpersonemail" class="form-control">
+								  </div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+									  <label>Allocation Person Phone No</label>
+									  <input [(ngModel)]="editLead.allocationpersonphoneno" name="allocationpersonphoneno" class="form-control">
+									</div>
+								  </div>
+							   <div class="col-sm-3">
+								 <div class="form-group">
+								  <label>Visited Date</label>
+								  <input [(ngModel)]="editLead.visited_date" name="visited_date" class="form-control">
+								</div>
+							  </div>
+					  
+							   <div class="col-sm-3">
+								 <div class="form-group">
+								  <label>Follow Up 1</label>
+								  <input [(ngModel)]="editLead.follow_up1" name="follow_up1" class="form-control">
+								</div>
+							  </div>
+							   <div class="col-sm-3">
+								<div class="form-group">
+								  <label>Follow Up 2</label>
+								  <input [(ngModel)]="editLead.follow_up2" name="follow_up2" class="form-control">
+								</div>
+							  </div>
+							   <div class="col-sm-3">
+								  <div class="form-group">
+								  <label>Follow Up 3</label>
+								  <input [(ngModel)]="editLead.follow_up3" name="follow_up3" class="form-control">
+								</div>
+							  </div>
+							   <div class="col-sm-3">
+								 <div class="form-group">
+								  <label>Status</label>
+								  <input [(ngModel)]="editLead.status" name="status" class="form-control">
+								</div>
+							  </div>
+							  </div>
+							</div>
+					  
+							<div class="text-center">
+								<button mat-button type="button" [disabled]="form.invalid" class="save_btn_chge_pas_wrd" (click)="editLeads()">SUBMIT</button>
+								<button mat-button class="cncl_btn_chge_pas_wrd"  (click)="cancelResons()">Cancel</button>
+							</div>
+						  </form>
+					  </div>
+				</div>
+			</div>
 			<div *ngIf="isLoading" class="loader">
 				<mat-spinner class="spinner"></mat-spinner>
 			</div>
-
-			<div class="tbl">
-				<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mlsTbl" width="100%">
+			
+			<div class="tbl" *ngIf="showNoData2();">
+				<table *ngIf="showTable" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mlsTbl" width="100%">
 					<ng-container matColumnDef="select" sticky class="stickyClass">
 						<th mat-header-cell *matHeaderCellDef></th>
-						<td mat-cell *matCellDef="let row">
-							<mat-checkbox (click)="$event.stopPropagation()"
-										  (change)="$event ? selection.toggle(row) : null"
-										  [checked]="selection.isSelected(row)">
-							</mat-checkbox>
+						<td mat-cell *matCellDef="let emp; let i = index">
+							<mat-checkbox value="{{emp.lead_id}}" 
+							[checked]="emp.checked"  (change)="getLeadId($event,emp.lead_id,i)" 
+							></mat-checkbox>
 						</td>
+						<!-- (change)="getLeadId($event,emp.lead_id)" -->
 					</ng-container>
 
 					<ng-container matColumnDef="lead_id" sticky class="stickyClass">
@@ -73,23 +427,37 @@
 					</ng-container>
 				
 					<ng-container matColumnDef="property_unique_id" sticky class="stickyClass">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> Lead&nbsp;Unique&nbsp;Id </th>
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;Unique&nbsp;Id </th>
 						<td mat-cell *matCellDef="let user"> {{user.property_unique_id}} </td>
 					</ng-container>
 				
-					<ng-container matColumnDef="property_id" sticky class="stickyClass">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;Id </th>
-						<td mat-cell *matCellDef="let user"> {{user.receiver_id}} </td>
+					<ng-container matColumnDef="property_id"  class="stickyClass">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>  Property&nbsp;Id </th>
+						<td mat-cell *matCellDef="let user">{{user.receiver_id}}
+							<div class="owner_dtl_contnr showpop{{user.receiver_id}}"  style="display:none">
+								<div class="owner_dtl">
+									<div class="owner_dtl_lead_manage">Owner Details</div>
+									<div class="ownr_bdy_lead_manage">
+										<div class="ownr_detail">
+											<label>Name:</label><span>{{user.contact_name}}</span>
+										</div>
+										<div class="ownr_detail">
+											<label>Email:</label><span>{{user.contact_email }}</span>
+										</div>
+										<div  class="ownr_detail">
+											<label>Contact Number:</label><span>{{user.contact_number}}</span>
+										</div>
+											<div class="text-center">
+											<button mat-button class="cncl_btn_chge_pas_wrd"  (click)="cancelOwner()">Cancel</button>
+											</div>
+									</div>
+								</div>
+							 </div>
+						</td>
 					</ng-container>
-					
-					<ng-container matColumnDef="user_id" sticky class="stickyClass">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> User&nbsp;Id </th>
-						<td mat-cell *matCellDef="let user"> {{user.user_id}} </td>
-					</ng-container>
-					
-					<ng-container matColumnDef="sender_id" class="noSticky">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> Sender&nbsp;Id </th>
-						<td mat-cell *matCellDef="let user"> {{user.sender_id}} </td>
+					<ng-container matColumnDef="owner" sticky class="stickyClass">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>  Owner&nbsp;Details</th>
+						<td mat-cell *matCellDef="let user"><span  (click)="getDetails(user.receiver_id)" class="show_ownr"><i class="fa  fa-user-circle-o" aria-hidden="true"></i></span> </td>
 					</ng-container>
 					
 					<ng-container matColumnDef="leads_status_id" class="noSticky">
@@ -99,16 +467,21 @@
 					
 					<ng-container matColumnDef="name" class="noSticky">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-						<td mat-cell *matCellDef="let user"> {{user.name}} </td>
+						<td mat-cell *matCellDef="let user" style="cursor:pointer;"> {{user.name}} </td>
 					</ng-container>
 					
 					<ng-container matColumnDef="email" class="noSticky">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
 						<td mat-cell *matCellDef="let user"> {{user.email}} </td>
 					</ng-container>
+
+					<ng-container matColumnDef="city" sticky class="stickyClass">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+						<td mat-cell *matCellDef="let user"> {{user.city}} </td>
+					</ng-container>
 					
 					<ng-container matColumnDef="mobileno" class="noSticky">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile No </th>
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile&nbsp;No </th>
 						<td mat-cell *matCellDef="let user"> {{user.mobileno}} </td>
 					</ng-container>
 					
@@ -117,14 +490,9 @@
 						<td mat-cell *matCellDef="let user"> {{user.type}} </td>
 					</ng-container>
 					
-					<ng-container matColumnDef="applied_date1" class="noSticky">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> Applied&nbsp;Date1 </th>
-						<td mat-cell *matCellDef="let user"> {{user.applied_date1}} </td>
-					</ng-container>
-					
 					<ng-container matColumnDef="applied_date" class="noSticky">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> Applied&nbsp;Date </th>
-						<td mat-cell *matCellDef="let user"> {{user.applied_date}} </td>
+						<td mat-cell *matCellDef="let user"> {{((user.applied_date !== '0000-00-00') ? (user.applied_date | date: 'yyyy-MM-dd') : '' )}} </td>
 					</ng-container>
 
 					<ng-container matColumnDef="lead_ip_address" class="noSticky">
@@ -199,17 +567,24 @@
 
 					<ng-container matColumnDef="visited_date" class="noSticky">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> Visited&nbsp;Date </th>
-						<td mat-cell *matCellDef="let user"> {{user.visited_date}} </td>
+						<td mat-cell *matCellDef="let user"> {{((user.visited_date !== '0000-00-00') ? (user.visited_date | date: 'yyyy-MM-dd') : '' )}} </td>
 					</ng-container>
 				
 					<tr mat-header-row *matHeaderRowDef="displayedColumns" class="noSticky"></tr>
 					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 				</table>
 			</div>
-			<mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
-			<mat-card class="btnCard">
-				<button mat-button (click)="pagePrevious(searchString)">Previous</button>
-				<button mat-button (click)="pageNext(searchString)">Next</button>
+			<mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons *ngIf="showNoData2();"></mat-paginator>
+			<mat-card class="btnCard" *ngIf="showNoData2();">
+				<span class="pag_nation_count">Total Leads : {{this.totalCount}}</span>
+				<button mat-button class="prev_btn_list" (click)="pagePrevious(searchString)">Previous</button>
+				<button mat-button class="nxt_btn_list" (click)="pageNext(searchString)" id="next_response">Next</button>
+			</mat-card>
+
+			<mat-card class="NoResults" *ngIf="showNoData();">
+				<h1>Sorry, No Results !</h1>
+				<p>We cannot find the item you are searching for.</p>
+				<img src="assets/images/search_error.png" alt="No Data Found">
 			</mat-card>
 			
 	 	</div>

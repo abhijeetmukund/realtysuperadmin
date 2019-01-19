@@ -1,10 +1,12 @@
 .prfle_chnge{
-                width:30%;
-                margin:40px auto;
+                
+                margin:-24px;
         .chnge_prfle_head{
-                background:#607d8b;
-                color:#fff;
-                text-align:center;
+          background: #607d8b;
+          color: #fff;
+          text-align: center;
+          padding: 15px;
+          font-size: 16px;
          }
          .chnge_prfle_body{
             padding:20px;
@@ -29,4 +31,17 @@
     border-radius:3px;
     margin-right:20px;
   }
+}
+.chnge_prfle{
+  position: relative;
+}
+.closeMatDialog{
+  position: absolute;
+  right: 15px;
+  font-size: 20px;
+  list-style: none;
+  color: #fff;
+  top: 13px;
+  outline: 0px;
+  background: transparent;
 }

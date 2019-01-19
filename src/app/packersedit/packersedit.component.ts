@@ -39,28 +39,4 @@ export class PackerseditComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.value.EmployeeID == null)
-      this.insertRecord(form);
-    else
-      this.updateRecord(form);
-  }
-
-  insertRecord(form: NgForm) {
-    this.data.postEmployee(form.value).subscribe(res => {
-      this.toastr.success('Inserted successfully', 'EMP. Register');
-      this.resetForm(form);
-      this.data.refreshList();
-    });
-  }
-
-  updateRecord(form: NgForm) {
-    this.data.putEmployee(form.value).subscribe(res => {
-      this.toastr.info('Updated successfully', 'EMP. Register');
-      this.resetForm(form);
-      this.data.refreshList();
-    });
-
-  }
-
 }

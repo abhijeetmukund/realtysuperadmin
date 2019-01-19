@@ -1,0 +1,42 @@
+.sub_menu_functions{
+
+    padding:10px 0px;
+}
+.menu_sub_list{
+    background: #F1F1F1;
+    margin-top: 52px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    z-index: 9;
+    padding: 15px 0px 0px;
+}
+.menu_sub_list ul{
+   width:100%;
+//    padding: 35px 0px 0px;
+}
+.menu_sub_list ul li{
+    float:right;
+    list-style: none;
+    width: 7%;
+}
+.menu_sub_list ul li a{
+    color:#6c6767c2;
+    text-decoration: none;
+}
+.menu_sub_list ul li a p{
+    font-size: 11px;
+    margin: 5px 0px 0px;
+}
+.add_img_admin{
+    width:27px;
+}
+.form_img_admin{
+    width:20px;
+}
+.zip_img_admin{
+    width:24px;
+}
+.add_plus_img_admin{
+    width:26px !important;
+}

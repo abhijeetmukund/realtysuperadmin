@@ -1,0 +1,37 @@
+<div class="chng_pass_word"> 
+  <form  #form="ngForm" novalidate >
+    <div class="row">
+      <div class="col-sm-3"></div> 
+      <div class="col-sm-6 act_setngs2">
+        <p class="text-center chne_pass_wrd_head">Add User</p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="User Email" [(ngModel)]="newUser.user_email" name="user_email">
+        </mat-form-field> 
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="User Password" #user_password [(ngModel)]="newUser.user_password" name="user_password">
+        </mat-form-field> 
+        <mat-form-field  class="example-full-width">
+          <mat-select [(value)]="selected" placeholder="Select Status" [(ngModel)]="newUser.user_status" name="user_status">
+            <mat-option *ngFor="let stat of stats" [value]="stat.value">
+              {{stat.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="First Name" name="u_firstname" [(ngModel)]="newUser.u_firstname" #u_firstname>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Last Name" name="u_lastname" #u_lastname [(ngModel)]="newUser.u_lastname">
+        </mat-form-field> 
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Mobile Number" name="u_mobile_no" [(ngModel)]="newUser.u_mobile_no">
+        </mat-form-field>
+        <div class="text-center">
+          <button mat-button type="button"  class="save_btn_chge_pas_wrd" (click)="addUser()">Save</button>
+          <button mat-button type="button" class="cncl_btn_chge_pas_wrd">Cancel</button>
+        </div>
+      </div>
+      <div class="col-sm-3"></div>
+      </div>
+  </form> 
+</div>

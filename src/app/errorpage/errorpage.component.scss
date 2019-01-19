@@ -1,0 +1,28 @@
+.btn_sbmit{
+    padding:6px 30px;
+    background: #607d8b;
+    color:#fff;
+    border:0px;
+    outline:0px;
+
+}
+.invalid{
+    border:1px solid red !important;
+}
+.pro{
+    border:1px solid #e21e24;
+    color:#e21e24;
+    border-radius: 20px;
+    padding:6px 30px;
+}
+.prpty_list input[type="radio"]:checked + label{
+    background: #e21e24;
+    color:#fff;
+}
+.sell_check{
+    display: none !important;
+}
+.checked_sell{
+    background: #e21e24;
+    color:#fff;
+}

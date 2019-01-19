@@ -4,49 +4,58 @@
       <div>
         <div class="subLeftNavbar">
             <ul> 
-              <li><a routerLink="/multi-listing-services" class="activeLeft">Listing Type</a></li>
+              <li><a routerLink="/multi-listing-services">Listing Type</a></li>
               <li><a routerLink="/user-type">User Type</a></li>
-              <li><a routerLink="/service-type" >Service Type</a></li>
-              <li><a routerLink="/property-type" >Property Type</a></li>
+              <li><a routerLink="/service-type" class="activeLeft">Service Type</a></li>
+              <li><a routerLink="/property-type">Property Type</a></li>
             </ul>
           </div>
       </div> 
     </div>
     
-	  <div class="col-sm-9 col-md-10">
+	  <div class="col-sm-9 col-md-10 marginTable">
       <div class="sub_mainSection listing_sub_mainSection">
         <div class="sub_header_contnr">
           <ul>
             <li (click)="userNext('sale')" [ngClass]="{'active': selectedItem === 'sale'}" (click)="selectedItem = 'sale'">Sale</li>
             <li (click)="userNext('rent')" [ngClass]="{'active': selectedItem === 'rent'}" (click)="selectedItem = 'rent'">Rent</li>
           </ul>
+          <div class="dte_range_pick">
+              <i class="material-icons">calendar_today</i>
+              <input type="text" placeholder="Select Date Range" matInput ngxDaterangepickerMd
+              [locale]="{applyLabel: 'ok', format: 'yyyy-MM-dd', separator: '-to-'}"
+              startKey="start" endKey="end" [(ngModel)]="dateSelected" name="daterange"
+              (change)='applyDate(dateSelected)' autocomplete="off"/>
+          </div>
         </div>
         <div class="action_section">
           <div class="listingName">
             <h4>Service Type</h4>
           </div>
           <div class="countrySelection">
-              <mat-form-field>
-                <mat-select placeholder="Choose Country" [(ngModel)]="countrySelected">
-                  <mat-option *ngFor="let country of countryList" [value]="country.cctld" (click)="changeCountry(countrySelected)">
-                    {{country.countryname}}
+              <mat-form-field class="example-full-width" [floatLabel]="'never'">
+                <input type="hidden" [(ngModel)]="countrySelected"  name="cctld" [value]="countrySelected">
+                <input type="text" placeholder="Enter Country" [(ngModel)]="selectedCountry" name="fieldName" ngDefaultControl matInput [matAutocomplete]="auto" [formControl]="myControl" [value]="selectedCountry">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" name="fieldName" ngDefaultControl>
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option.countryname" (onSelectionChange)="onKeydown($event,option.cctld)" id="chooseCountry">
+                    {{option.countryname}}
                   </mat-option>
-                </mat-select> 
+                </mat-autocomplete>
               </mat-form-field>
             </div>
           <div class="all_function_icon">
             <ul>
-              <li><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilter($event.target.value)" [(ngModel)]="searchString" class="find_prpty"></li>
+              <li class="all_fnshn"><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilter($event.target.value)" [(ngModel)]="searchString" class="find_prpty"></li>
             </ul>
             <ul class="filter_section">
               <li class="filterIcons" (click)="openModal()"><span><i class="fa fa-trash" aria-hidden="true"></i></span><span>Delete</span></li>
-              <li class="filterIcons" routerLink="/edit"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li>
-              <li class="filterIcons"><span><i class="fa fa-filter"></i></span><span>Import</span></li>
-              <li><button (click)="uploadFiles()" class="upBtn"><span class="upSpan">Upload</span></button></li>
-              <li class="filterIcons"><a href="https://www.realtymonk.com/api/freelisting/export"><span><i class="fa fa-download"></i></span><span>Download</span></a></li>
-              <li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
-              <li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li>
-              <li class="dspnon"><input type="file" accept=".xlsx, .xls, .csv" (change)="getFileDetails($event)" id="picked" #picked /></li>
+              <!-- <li class="filterIcons" (click)="openEditPopup()"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li> -->
+              <li class="filterIcons" ><label for="picked" class="picked"><span><i class="fa fa-filter"></i></span><span>Import</span></label></li>
+              <li class="filterIcons"><a href="https://www.realtymonk.com/websapi/freelisting/export"><span><i class="fa fa-download"></i></span><span>Download</span></a></li>
+              <li class="filterIcons" (click)="refreshData()"><span><i  class="material-icons refresh_icon">refresh</i></span><span>Refresh</span></li>
+              <!-- <li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
+              <li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li> -->
+              <li class="dspnon"><input type="file" accept=".xlsx, .xls, .csv" (change)="getFileDetails($event);uploadFiles()" id="picked" #picked /></li>
             </ul>
           </div>
         </div>
@@ -56,14 +65,12 @@
         <mat-spinner class="spinner"></mat-spinner>
       </div>
       
-      <div class="tbl">
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table-striped mlsTbl" width="100%">
+      <div class="tbl" *ngIf="showNoData2();">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 mlsTbl" width="100%">
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null"
-                            [checked]="selection.isSelected(row)">
+              <mat-checkbox >
               </mat-checkbox>
             </td>
           </ng-container>
@@ -71,6 +78,11 @@
           <ng-container matColumnDef="property_details_id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;ID </th>
             <td mat-cell *matCellDef="let user"> {{user.property_details_id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="property_unique_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Property&nbsp;Unique&nbsp;ID</th>
+            <td mat-cell *matCellDef="let user"> <a href="{{user.propertyUrl}}" target="_blank" class="propertyIdLink">{{user.property_unique_id}}</a> </td>
           </ng-container>
 
           <ng-container matColumnDef="posted_by">
@@ -113,19 +125,31 @@
             <td mat-cell *matCellDef="let user"> {{user.city}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="login_id">
+          <!-- <ng-container matColumnDef="login_id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Login&nbsp;ID</th>
             <td mat-cell *matCellDef="let user"> {{user.login_id}} </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="service_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Service&nbsp;Type</th>
+            <td mat-cell *matCellDef="let user"> {{user.service_name}} </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-      <mat-card class="btnCard">
-        <button mat-button (click)="pagePrevious(searchString)">Previous</button>
-        <button mat-button (click)="pageNext(searchString)">Next</button>
+      <mat-paginator [pageSizeOptions]="[10, 20]"  *ngIf="showNoData2();"></mat-paginator>
+      <mat-card class="btnCard" *ngIf="showNoData2();">
+        <span class="pag_nation_count">Total Listings : {{this.totalCount}}</span>
+        <button mat-button class="prev_btn_list" (click)="pagePrevious(searchString)">Previous</button>
+        <button mat-button class="nxt_btn_list" (click)="pageNext(searchString)">Next</button>
+      </mat-card>
+
+      <mat-card class="NoResults" *ngIf="showNoData();">
+        <h1>Sorry, No Results !</h1>
+        <p>We cannot find the item you are searching for.</p>
+        <img src="assets/images/search_error.png" alt="No Data Found">
       </mat-card>
       
     </div>

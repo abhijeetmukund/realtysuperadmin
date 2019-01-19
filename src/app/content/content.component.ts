@@ -1,23 +1,37 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { DataService } from '../data.service';
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { User } from './../_models/user';
+import { UserService } from './../_services/user.service';
+import { AuthenticationService } from './../_services/authentication.service';
 import { Observable } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 import { SelectionModel } from '@angular/cdk/collections';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AppComponent} from './../app.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import {NgXDonutChartSlice} from 'ngx-donutchart/ngx-donutchart.type';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit{ 
+
+export class ContentComponent implements OnInit,  OnDestroy{
+  
+  currentUser: User;
+    currentUserSubscription: Subscription;
+    users: User[] = [];
+
   isloginid ="";
   userid="";
-  constructor(private router: Router,private app: AppComponent) {
-
-
+  constructor(private router: Router,private app: AppComponent,private authenticationService: AuthenticationService,
+    private userService: UserService) {
+      this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+        this.currentUser = user;
+    });
   }
   
   public map_ChartData = [
@@ -48,26 +62,51 @@ export class ContentComponent implements OnInit{
 
 
   ngOnInit() {
-    
+    this.loadAllUsers();
   }
 
-  donutChartData = [
-    {
-      label: '',
-      value: 5,
-      color: 'red',
-    },
-    {
-      label: '        ',
-      value: 2,
-      color: 'black',
-    },
-    {
-      label: '',
-      value: 5,
-      color: 'blue',
-    },
-  ];
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.currentUserSubscription.unsubscribe();
+}
+
+deleteUser(id: number) {
+    this.userService.delete(id).pipe(first()).subscribe(() => {
+        this.loadAllUsers()
+    });
+}
+
+private loadAllUsers() {
+    this.userService.getAll().pipe(first()).subscribe(users => {
+        this.users = users;
+    });
+}
+
+slices: NgXDonutChartSlice[] | any[] = [ // exported type
+  {
+    value: 50,
+    color: '#A3A1FB'
+  },
+  {
+    value: 10,
+    color: '#5EE2A0'
+  },
+  {
+    value: 20,
+    color: '#FFA177'
+  },
+  {
+    value: 5,
+    color: '#FF6565'
+  },
+  {
+    value: 15,
+    color: '#FEC163'
+  }
+];
+
+size = 170;
+innerRadius = 65
 
   chartOptions = {
     scales: {

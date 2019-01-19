@@ -2,7 +2,9 @@
     border-bottom: 3px solid #607d8b;
 }
 .loader{
-	margin-top: 15px !important;
+	position: absolute;
+	top: 40%;
+	left: 43%;
 }
 .spinner{
 	margin: 0 auto !important;
@@ -12,8 +14,11 @@
 	color: #fff;
 	text-align: center;
 }
+.mlsTbl tr:nth-child(odd){
+	background: #f0f8ff;
+}
 .tbl{
-	
+	width: 100%;
 	overflow-x: auto;
 }
 .picked{
@@ -51,11 +56,13 @@ upBtn:hover{
 .btnCard button:nth-child(1){
 	margin-right: 25px;
 }
-.countrySelection{
-	display: inline;
-    position: relative;
-    left: 320px;
-}
+
 ::ng-deep .daterangepicker{
 	display: block;
+}
+.buttons_input button{
+	width: 15% !important;
+}
+.propertyIdLink{
+	color: rgba(0,0,0,.87);
 }

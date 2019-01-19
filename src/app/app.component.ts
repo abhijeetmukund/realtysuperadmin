@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
 @Component({
@@ -8,23 +8,24 @@ import { Router, NavigationStart } from '@angular/router';
 })
 export class AppComponent {
 
-  title = 'superadmin';  
+  title = 'superadmin';
   showHead: boolean = false;
-  ngOnInit() {
-  }
 
   constructor(private router: Router) {
-    // on route change to '/login', set the variable showHead to false
-      router.events.forEach((event) => {
-        if (event instanceof NavigationStart) {
-          if (event['url'] == '/') {
-            this.showHead = false;
-          } else {
-            // console.log("NU")
-            this.showHead = true;
-          }
+    
+    router.events.forEach((event) => {
+      if (event instanceof NavigationStart) {
+        if (event['url'] == '/') {
+          this.showHead = false;
+        } else {
+          this.showHead = true;
         }
-      });
-    }
+      }
+    });
+  }
+
+  ngOnInit() {
+  
+  }
 
 }

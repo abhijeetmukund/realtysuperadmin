@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+export interface Status {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-furniture',
@@ -11,5 +15,8 @@ export class FurnitureComponent implements OnInit {
 
   ngOnInit() {
   }
-
+ statuss: Status[] = [
+    {value: 'active', viewValue: 'Active'},
+    {value: 'inactive', viewValue: 'In Active'}
+ ];
 }

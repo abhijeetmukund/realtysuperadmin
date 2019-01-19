@@ -1,3 +1,72 @@
-<p>
-  add-permission works!
-</p>
+<div class="ad_per_missions_tree">
+    <form>
+      <h4>Add Permission</h4>
+      <div class="row user_select_admin">
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="User Name">
+            <mat-option *ngFor="let user of users" [value]="user.value">
+              {{user.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <h4 class="mo_dules_head_admin">Modules</h4>
+      <div class="row">
+          <div class="col-sm-4">
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+              <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                <button mat-icon-button disabled></button>
+                <mat-checkbox class="checklist-leaf-node"
+                              [checked]="checklistSelection.isSelected(node)"
+                              (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+              </mat-tree-node>
+  
+              <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                <button mat-icon-button disabled></button>
+                <mat-form-field>
+                  <input matInput #itemValue placeholder="New item...">
+                </mat-form-field>
+                <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+              </mat-tree-node>
+  
+              <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                <button mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="'toggle ' + node.filename">
+                  <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon>
+                </button>
+                <mat-checkbox [checked]="descendantsAllSelected(node)"
+                              [indeterminate]="descendantsPartiallySelected(node)"
+                              (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                <!-- <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button> -->
+              </mat-tree-node>
+            </mat-tree>
+          </div>
+      </div>
+      <h4 class="mo_dules_head_admin">Actions</h4>
+      <div class="row action_module_chk_bx">
+        <div class="col-sm-3">
+          <mat-checkbox class="green">Add</mat-checkbox>
+        </div>
+        <div class="col-sm-3">
+          <mat-checkbox>Edit</mat-checkbox>
+        </div>
+        <div class="col-sm-3">
+          <mat-checkbox>View</mat-checkbox>
+        </div>
+        <div class="col-sm-3">
+          <mat-checkbox>Delete</mat-checkbox>
+        </div>
+        <div class="col-sm-3">
+          <mat-checkbox>Import</mat-checkbox>
+        </div>
+        <div class="col-sm-3">
+          <mat-checkbox>Export</mat-checkbox>
+        </div>
+        <div class="col-sm-3">
+          <mat-checkbox>Print</mat-checkbox>
+        </div>
+      </div>
+    </form>
+  </div>

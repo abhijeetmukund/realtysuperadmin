@@ -12,7 +12,7 @@
  .leftNavContnr{
     background:#4c4c4c;
     position:absolute;
-    left: -2px;
+    left: -4px;
     top: 48px;
     width: 60%;
     height: 92vh;
@@ -102,7 +102,7 @@
     height: 170px;
     border: 1px solid #ccc;
     /* border-radius: 0px; */
-    box-shadow: 0px 3px 16px 1px #ccc;
+    box-shadow: 1px 1px 6px 0px #ccc;
     margin-top: 49px;
     padding: 10px;
     text-align: left;
@@ -129,7 +129,7 @@
     bottom: 10px;
     /* position: fixed; */
     top: 10px;
-    height: 50px;
+    height: 46px;
     padding: 8px;
 }
 .usr_profile{
@@ -159,4 +159,7 @@
 .user_dtl{
     position: absolute;
     top: 31px;
+}
+.active{
+    background: #607d8b;
 }

@@ -12,7 +12,43 @@
         background:#fff;
 }
 .charts_section{
-	background:#fff;
+	
 	margin:15px 0px;
 	padding: 5px;
+}
+.base_charts{
+        background: #fff;
+        padding: 10px;
+        height:300px;
+}
+.locate_user_point{
+        background: #fff;
+        height:300px;
+}
+.base_charts h6{
+        border-bottom:1px solid #ccc;
+}
+.base_charts p{
+        font-size: 13px;
+}
+.cntry_full_report{
+        margin-top:10px;
+}
+.cntry_full_report p{
+        text-align: right;
+}
+.cntry_full_report p a{
+        font-size: 12px;
+        text-decoration: none;
+}
+.donut_charts_sec{
+        background: #fff;
+        height:300px;
+        text-align:center;
+}
+.donut_charts_sec .c-donutchart{
+        width:100% !important;
+}
+.online_user{
+        font-size: 18px;
 }

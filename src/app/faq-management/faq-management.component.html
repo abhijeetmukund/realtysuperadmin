@@ -1,0 +1,125 @@
+<div class="container-fluid">
+<!-- subheader --------- -->
+  <div class="row"> 
+  	     <!-- sub sidebar  -->
+	<div class="col-sm-3 col-md-2">
+	 	<div>
+			<div  class="subLeftNavbar">
+					<ul> 
+						<li><a routerLink="/furniture" class="activeLeft">Category Management</a></li>
+						<li><a routerLink="/product-management" >Product Management</a></li>
+						<li><a routerLink="/shipping-management" >Shipping Management</a></li>
+						<li><a routerLink="/terms-conditions" >Terms & Conditions</a></li>
+						<li><a routerLink="/faq-management" >Faq Management</a></li>
+					</ul>
+				</div>
+     </div> 
+	 </div>
+		<!-- sub sidebar end -->
+	  <div class="col-sm-9 col-md-10">
+       <div class="sub_mainSection listing_sub_mainSection">
+  			<div class="">
+          <mat-tab-group>
+            <mat-tab label="Add New Faq">
+              <div class="action_section">
+                <div class="listingName">
+                  <h4>Faq Management</h4>
+                </div>
+                <div class="all_function_icon">
+                  <ul>
+                    <!-- <li><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilter($event.target.value)" class="find_prpty"></li> -->
+                  </ul>
+                  <ul class="filter_section">
+                    <li class="filterIcons"><span><i class="fa fa-trash" aria-hidden="true"></i></span><span>Delete</span></li>
+                    <li class="filterIcons" routerLink="/edit"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li>
+                    <li class="filterIcons"><span><i class="fa fa-filter"></i></span><span>Import</span></li>
+                    <li class="filterIcons"><span><i class="fa fa-download"></i></span><span>Download</span></li>
+                    <li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
+                    <li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="chng_pass_word">
+  <form>
+    <div class="row">
+      <div class="col-sm-12 act_setngs">
+        <p class="text-center chne_pass_wrd_head">Add New Faq</p>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Category">
+            <mat-option *ngFor="let category of categories" [value]="category.value">
+              {{category.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Subcategory">
+            <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.value">
+              {{subcategory.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Product Name">
+            <mat-option *ngFor="let productname of products" [value]="productname.value">
+              {{productname.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Status">
+            <mat-option *ngFor="let status of statuss" [value]="status.value">
+              {{status.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Faq Category">
+            <mat-option *ngFor="let faqcategory of faqcategories" [value]="faqcategory.value">
+              {{faqcategory.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+            <h6>FREQUENTLY ASKED QUESTIONS</h6>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Question"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Answer"></textarea>
+            </mat-form-field>
+        <div class="text-center">
+          <button mat-button class="ad_mre_btn_admin">Add More</button>
+          <button mat-button class="save_btn_chge_pas_wrd">Save</button>
+          <button mat-button type="reset" class="cncl_btn_chge_pas_wrd">Reset</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+            </mat-tab>
+            <mat-tab label="View Faq"> 
+              <div class="action_section">
+                <div class="listingName">
+                  <h4>Faq Management</h4>
+                </div>
+                <div class="all_function_icon">
+                  <ul>
+                    <!-- <li><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilter($event.target.value)" class="find_prpty"></li> -->
+                  </ul>
+                  <ul class="filter_section">
+                    <li class="filterIcons"><span><i class="fa fa-trash" aria-hidden="true"></i></span><span>Delete</span></li>
+                    <li class="filterIcons" routerLink="/edit"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li>
+                    <li class="filterIcons"><span><i class="fa fa-filter"></i></span><span>Import</span></li>
+                    <li class="filterIcons"><span><i class="fa fa-download"></i></span><span>Download</span></li>
+                    <li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
+                    <li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li>
+                  </ul>
+                </div>
+              </div>
+             </mat-tab>
+          </mat-tab-group>
+  			</div> 
+  			
+		</div>
+ </div>
+   </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="packs_mvs_sec_tion">
+    <form #form="ngForm" autocomplete="off">
+        <div class="ad_pack_ers">Add Packers</div>
+        <div class="btnCancel">
+      <button mat-button mat-dialog-close>X</button>
+    </div>
+       <div class="pack_bdy_list">
+          <div class="form-group">
+              <label>Packer Name</label>
+              <input [(ngModel)]="addPackers.packer_name" name="packer_name" class="form-control" required>
+              <!-- <div class="validation-error" *ngIf="packer_name.invalid && packer_name.touched">This field is required.</div> -->
+          </div>
+        
+          <div class="form-group">
+            <label>Email</label>
+            <input [(ngModel)]="addPackers.packer_email" name="packer_email" class="form-control" required>
+            <!-- <div class="validation-error" *ngIf="packer_email.invalid && packer_email.touched">This field is required.</div> -->
+          </div>
+        
+          <div class="form-group">
+            <label>Mobile</label>
+            <input [(ngModel)]="addPackers.packer_mobile" name="packer_mobile" class="form-control">
+          </div>
+        
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Location From</label>
+              <input [(ngModel)]="addPackers.packer_location_from" ngx-google-places-autocomplete #placesRef="ngx-places" name="packer_location_from" class="form-control">
+            </div>
+            <div class="form-group  col-md-6">
+              <label>Location To</label>
+              <input [(ngModel)]="addPackers.packer_location_to" ngx-google-places-autocomplete #placesRef="ngx-places" name="packer_location_to" class="form-control">
+            </div>
+          </div>
+        
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Contacted Date</label>
+              <input [(ngModel)]="addPackers.contacted_date" name="contacted_date" class="form-control">
+            </div>
+            <div class="form-group  col-md-6">
+              <label>Vehicle No</label>
+              <input [(ngModel)]="addPackers.VehicleNo" name="VehicleNo" class="form-control">
+            </div>
+          </div>
+        
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Vehicle Type</label>
+              <input [(ngModel)]="addPackers.VehicleType" name="VehicleType" class="form-control">
+            </div>
+            <div class="form-group  col-md-6">
+              <label>Driver Name</label>
+              <input [(ngModel)]="addPackers.DriverName" name="DriverName" class="form-control">
+            </div>
+          </div>
+        
+          <div class="form-row">
+            <div class="form-group  col-md-6">
+              <label>Payment</label>
+              <input [(ngModel)]="addPackers.payment" name="payment" class="form-control">
+            </div>
+          </div>
+          <div class="text-center">
+              <button mat-button type="button" class="" [disabled]="form.invalid" class="save_btn_chge_pas_wrd" (click)="addPackersMovers()">SUBMIT</button>
+              <button mat-button class="cncl_btn_chge_pas_wrd" mat-dialog-close>Cancel</button>
+            </div>
+       </div>
+      
+        
+      </form>
+</div>

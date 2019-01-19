@@ -1,6 +1,7 @@
 <div class="prfle_chnge">
-  <ul class="list-group">
-    <li class="list-group-item chnge_prfle_head">Change Profile</li>
+  <ul class="list-group chnge_prfle">
+    <li class="chnge_prfle_head">Change Profile</li>
+    <button mat-button mat-dialog-close class="closeMatDialog">X</button>
     <li class="list-group-item">
             <form>
                     <div class="chnge_prfle_body">
@@ -16,7 +17,7 @@
                </div>
                <div class="text-center">
                                <button mat-button class="cncl_btn_chge_pas_wrd">Update</button>
-                <button mat-button class="save_btn_chge_pas_wrd">Cancel</button>
+                <button mat-button class="save_btn_chge_pas_wrd" mat-dialog-close>Cancel</button>
            </div>
             </form>
     </li>

@@ -13,8 +13,11 @@
 	text-align: center;
 }
 .tbl{
-	width: 1069px;
+	width: 100%;
 	overflow-x: auto;
+}
+.marginTable{
+	margin-left: -62px;
 }
 .picked{
 	cursor: pointer;
@@ -50,4 +53,8 @@ upBtn:hover{
 }
 .btnCard button:nth-child(1){
 	margin-right: 25px;
+}
+.del{
+	position: relative;
+    top: -14px;
 }

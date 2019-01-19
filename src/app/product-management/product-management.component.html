@@ -1,0 +1,241 @@
+<div class="container-fluid">
+<!-- subheader --------- -->
+  <div class="row"> 
+  	     <!-- sub sidebar  -->
+	<div class="col-sm-3 col-md-2">
+	 	<div>
+			<div  class="subLeftNavbar">
+					<ul> 
+						<li><a routerLink="/furniture" class="activeLeft">Category Management</a></li>
+						<li><a routerLink="/product-management" >Product Management</a></li>
+						<li><a routerLink="/shipping-management" >Shipping Management</a></li>
+						<li><a routerLink="/terms-conditions" >Terms & Conditions</a></li>
+						<li><a routerLink="/faq-management" >Faq Management</a></li>
+					</ul>
+				</div>
+     </div> 
+	 </div>
+		<!-- sub sidebar end -->
+	  <div class="col-sm-9 col-md-10">
+         <div class="sub_mainSection listing_sub_mainSection">
+			<div class="sub_header_contnr">
+				<ul>
+					<li><a routerLink="/product-management" class="activePlan">Add New Product</a></li>
+					<li><a routerLink="/view-products">View Products </a></li>
+					<li><a routerLink="/view-product-price">View Product Price</a></li>
+          <li><a routerLink="/add-new-image">Add New Image </a></li>
+          <li><a routerLink="/add-new-offer">Add New Offer </a></li>
+					<li><a routerLink="/view-offers">View Offers </a></li>
+				</ul>
+			</div> 
+			<div class="action_section">
+				<div class="listingName">
+					<h4>Product Management</h4> 
+				</div>
+				<div class="all_function_icon">
+					<ul>
+						<!-- <li><i class="fa fa-search"></i><input type="text" placeholder="Find Property" (keyup)="applyFilter($event.target.value)" class="find_prpty"></li> -->
+					</ul>
+					<ul class="filter_section">
+						<li class="filterIcons"><span><i class="fa fa-trash" aria-hidden="true"></i></span><span>Delete</span></li>
+						<li class="filterIcons" routerLink="/edit"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span><span>Edit</span></li>
+						<li class="filterIcons"><span><i class="fa fa-filter"></i></span><span>Import</span></li>
+						<li class="filterIcons"><span><i class="fa fa-download"></i></span><span>Download</span></li>
+						<li class="filterIcons"><span><i class="material-icons">more_horiz</i></span></li>
+						<li class="top_toggle"><span><i class="fa fa-angle-up"></i></span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+   <div class="add_new_prdt">
+  <form>
+    <h4 class="text-center">Add New Product</h4>
+    <div class="row">
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Category Name">
+            <mat-option *ngFor="let category of categories" [value]="category.value">
+              {{category.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Subcategory Name">
+            <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory.value">
+              {{subcategory.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Status">
+            <mat-option *ngFor="let status of statuss" [value]="status.value">
+              {{status.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+         <input matInput placeholder="Product Name" >
+       </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+         <input matInput placeholder="Brand Name">
+       </mat-form-field>
+      </div>
+      <div class="col-sm-4">
+        <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="picker" placeholder="Manufacturing date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="under_line_admin"></div>
+    <div class="row siz_dimens_admin">
+      <div class="col-sm-6">
+        <h5>Size & Dimentions</h5>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Size & Dimentions" value="">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Sub Heading of Size & Dimentions" value="">
+        </mat-form-field>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Length Key" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Length Value" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Breadth Key" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Breadth Value" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Height Key" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Height Value" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-right">
+          <button mat-button class="cncl_btn_chge_pas_wrd">Add More</button>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h5>Material & Color</h5>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Material Colors" value="">
+        </mat-form-field>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Material Key" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Material Value" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-right">
+          <button mat-button class="cncl_btn_chge_pas_wrd">Add More</button>
+        </div>
+      </div>
+    </div>
+    <div class="under_line_admin"></div>
+    <div class="row siz_dimens_admin">
+      <div class="col-sm-6">
+        <h5>Additional Information</h5>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Additional Information" value="">
+        </mat-form-field>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Additional Key" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Additonal Value" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="text-right">
+          <button mat-button class="cncl_btn_chge_pas_wrd">Add More</button>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <h5>Description</h5>
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Description" cols="60"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="under_line_admin"></div>
+    <h5 class="text-center">Price</h5>
+      <div class="prc_lst_add_prdct">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-12 tenure_head_prdct">Tenure</div>
+              <div class="col-sm-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Security Deposit" value="">
+                </mat-form-field>
+              </div>
+          <div class="col-sm-2">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Month 1-3" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-2">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Month 4-9" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-2">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Month 10+" value="">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-3">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Additional Information" value="">
+            </mat-form-field>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button mat-button class="save_btn_chge_pas_wrd">Save</button>
+        <button mat-button type="reset" class="cncl_btn_chge_pas_wrd">Reset</button>
+      </div>
+  </form>
+</div>
+
+
+ </div>
+   </div>
+</div>
